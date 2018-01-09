@@ -31,3 +31,4 @@
 *.out
 *.app
 /.vs/COMS327/v15
+/Homework1/obj/ARM/Debug

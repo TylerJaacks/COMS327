@@ -35,11 +35,13 @@
     <ApplicationTypeRevision>1.0</ApplicationTypeRevision>
     <TargetLinuxPlatform>Generic</TargetLinuxPlatform>
     <LinuxProjectType>{FC1A4D80-50E9-41DA-9192-61C0DBAA00D2}</LinuxProjectType>
+    <ProjectName>Assignment0</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
     <ConfigurationType>Makefile</ConfigurationType>
+    <RemoteRootDir>/home/tylerjaacks/COMS327/</RemoteRootDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
@@ -72,6 +74,10 @@
     <BuildCommandLine>
     </BuildCommandLine>
     <RemoteBuildOutputs>/home/tjaacks/COMS327/Homework1/Homework1</RemoteBuildOutputs>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
+    <RemoteBuildOutputs>/home/tylerjaacks/COMS327/Assignment0/</RemoteBuildOutputs>
+    <RemoteBuildCommandLine>make Assignment0</RemoteBuildCommandLine>
   </PropertyGroup>
   <ItemGroup>
     <ClCompile Include="main.c" />
