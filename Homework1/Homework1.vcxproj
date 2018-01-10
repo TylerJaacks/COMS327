@@ -41,19 +41,22 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
     <ConfigurationType>Makefile</ConfigurationType>
-    <RemoteRootDir>/home/tylerjaacks/COMS327/</RemoteRootDir>
+    <RemoteRootDir>~/COMS327/</RemoteRootDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
     <ConfigurationType>Makefile</ConfigurationType>
+    <RemoteRootDir>~/COMS327/</RemoteRootDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
     <ConfigurationType>Makefile</ConfigurationType>
+    <RemoteRootDir>~/COMS327/</RemoteRootDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
     <ConfigurationType>Makefile</ConfigurationType>
+    <RemoteRootDir>~/COMS327/</RemoteRootDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
@@ -63,6 +66,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
     <ConfigurationType>Makefile</ConfigurationType>
+    <RemoteRootDir>~/COMS327/</RemoteRootDir>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings" />
@@ -70,13 +74,29 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <RemoteBuildCommandLine>make Homework1</RemoteBuildCommandLine>
+    <RemoteBuildCommandLine>make Assignment0</RemoteBuildCommandLine>
     <BuildCommandLine>
     </BuildCommandLine>
-    <RemoteBuildOutputs>/home/tjaacks/COMS327/Homework1/Homework1</RemoteBuildOutputs>
+    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment0/Assignment0</RemoteBuildOutputs>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
-    <RemoteBuildOutputs>/home/tylerjaacks/COMS327/Assignment0/</RemoteBuildOutputs>
+    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment0/Assignment0</RemoteBuildOutputs>
+    <RemoteBuildCommandLine>make Assignment0</RemoteBuildCommandLine>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
+    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment0/Assignment0</RemoteBuildOutputs>
+    <RemoteBuildCommandLine>make Assignment0</RemoteBuildCommandLine>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment0/Assignment0</RemoteBuildOutputs>
+    <RemoteBuildCommandLine>make Assignment0</RemoteBuildCommandLine>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
+    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment0/Assignment0</RemoteBuildOutputs>
+    <RemoteBuildCommandLine>make Assignment0</RemoteBuildCommandLine>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment0/Assignment0</RemoteBuildOutputs>
     <RemoteBuildCommandLine>make Assignment0</RemoteBuildCommandLine>
   </PropertyGroup>
   <ItemGroup>
