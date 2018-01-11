@@ -1,46 +1,44 @@
 #include <stdio.h>
 
+int board[4][4] = {
+	{ 0 },{ 0 },{ 0 },{ 0 },
+	{ 0 },{ 0 },{ 0 },{ 0 },
+	{ 0 },{ 0 },{ 0 },{ 0 },
+	{ 0 },{ 0 },{ 0 },{ 0 }
+};
+
+int maxQueens = 4;
+
 int main(int argc, char* argv)
 {
-	int board[4][4] = {
-	/*
-		0,0 0,1 0,2 0,3
-		1,0 1,1 1,2 1,3
-		2,0 ...........
-		...............
-	*/
-		{0}, {0}, {0}, {0},
-		{0}, {0}, {0}, {0},
-		{0}, {0}, {0}, {0},
-		{0}, {0}, {0}, {0}
-	};
-
-	int queenCount = 0;
-
-	board[0][0] = 1;
-	queenCount += 1;
-
-	if (can_attack(1, 1, board) == 1)
-	{
-		printf("Can attack!\n");
-	}
-
-	else
-	{
-		board[1][1] = 1;
-	}
-
-	//draw_board(board);
+	draw_board();
 
 	return 0;
 }
 
-int can_attack(int row, int col, int board[4][4])
+int recursion(int queens)
+{
+	int queenCount = 0;
+
+	if (queenCount == maxQueens)
+	{
+		printf("Finished");
+
+		return 0;
+	}
+
+	else
+	{
+
+	}
+}
+
+int can_attack(int row, int col)
 {
 	int can_attack = 0;
 
-	// Check Rows
-	for (int i = 0; i < 4; i++) 
+	// Check rows
+	for (int i = 0; i < 4; i++)
 	{
 		if (board[row][i] == 1)
 		{
@@ -48,7 +46,7 @@ int can_attack(int row, int col, int board[4][4])
 		}
 	}
 
-	// Check Columns
+	// Check columns
 	for (int i = 0; i < 4; i++)
 	{
 		if (board[i][col] == 1)
@@ -57,11 +55,26 @@ int can_attack(int row, int col, int board[4][4])
 		}
 	}
 
+	// Check diagonals
+	for (int i = 0; i < 4; i++) 
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			if (board[i][j] == 1)
+			{
+				if (abs(board[i][0] - col) == abs(board[0][j] - row)) 
+				{
+					return 1;
+				}
+			}
+		}
+	}
+
 	return can_attack;
 }
 
 // https://stackoverflow.com/questions/35936358/c-printing-a-2d-char-array
-void draw_board(int board[4][4])
+void draw_board()
 {
 	for (int k = 0; k < 4; ++k) {
 		for (int j = 0; j < 4; ++j) {
