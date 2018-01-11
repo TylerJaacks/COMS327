@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int board[4][4] = {
-	{ 0 },{ 0 },{ 0 },{ 0 },
+	{ 1 },{ 0 },{ 0 },{ 0 },
 	{ 0 },{ 0 },{ 0 },{ 0 },
 	{ 0 },{ 0 },{ 0 },{ 0 },
 	{ 0 },{ 0 },{ 0 },{ 0 }
@@ -12,6 +12,15 @@ int maxQueens = 4;
 int main(int argc, char* argv)
 {
 	draw_board();
+
+	board[1][1] = 1;
+
+	draw_board();
+
+	if (can_attack(1, 1) == 1)
+	{
+		printf("Can attack!");
+	}
 
 	return 0;
 }
