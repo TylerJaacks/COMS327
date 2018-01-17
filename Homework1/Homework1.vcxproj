@@ -100,7 +100,9 @@
     <RemoteBuildCommandLine>make Assignment0</RemoteBuildCommandLine>
   </PropertyGroup>
   <ItemGroup>
+    <ClCompile Include="CHANGELOG" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="README" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="Makefile" />
