@@ -27,15 +27,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{88656a7c-3fa1-4344-ac8a-1cb1184090e6}</ProjectGuid>
+    <ProjectGuid>{02A90B79-7A69-45CF-A5B0-F014E743DF3A}</ProjectGuid>
     <Keyword>Linux</Keyword>
-    <RootNamespace>Homework1</RootNamespace>
+    <RootNamespace>Assignment1.01</RootNamespace>
     <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
     <ApplicationType>Linux</ApplicationType>
     <ApplicationTypeRevision>1.0</ApplicationTypeRevision>
     <TargetLinuxPlatform>Generic</TargetLinuxPlatform>
     <LinuxProjectType>{FC1A4D80-50E9-41DA-9192-61C0DBAA00D2}</LinuxProjectType>
-    <ProjectName>Assignment0</ProjectName>
+    <ProjectName>Assignment1.01</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
@@ -74,30 +74,30 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <RemoteBuildCommandLine>make Assignment0</RemoteBuildCommandLine>
+    <RemoteBuildCommandLine>make Assignment1.01</RemoteBuildCommandLine>
     <BuildCommandLine>
     </BuildCommandLine>
-    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment0/Assignment0</RemoteBuildOutputs>
+    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.01/Assignment1.01</RemoteBuildOutputs>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
-    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment0/Assignment0</RemoteBuildOutputs>
-    <RemoteBuildCommandLine>make Assignment0</RemoteBuildCommandLine>
+    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.01/Assignment1.01</RemoteBuildOutputs>
+    <RemoteBuildCommandLine>make Assignment1.01</RemoteBuildCommandLine>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
-    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment0/Assignment0</RemoteBuildOutputs>
-    <RemoteBuildCommandLine>make Assignment0</RemoteBuildCommandLine>
+    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.01/Assignment1.01</RemoteBuildOutputs>
+    <RemoteBuildCommandLine>make Assignment1.01</RemoteBuildCommandLine>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment0/Assignment0</RemoteBuildOutputs>
-    <RemoteBuildCommandLine>make Assignment0</RemoteBuildCommandLine>
+    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.01/Assignment1.01</RemoteBuildOutputs>
+    <RemoteBuildCommandLine>make Assignment1.01</RemoteBuildCommandLine>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
-    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment0/Assignment0</RemoteBuildOutputs>
-    <RemoteBuildCommandLine>make Assignment0</RemoteBuildCommandLine>
+    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.01/Assignment1.01</RemoteBuildOutputs>
+    <RemoteBuildCommandLine>make Assignment1.01</RemoteBuildCommandLine>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
-    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment0/Assignment0</RemoteBuildOutputs>
-    <RemoteBuildCommandLine>make Assignment0</RemoteBuildCommandLine>
+    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.01/Assignment1.01</RemoteBuildOutputs>
+    <RemoteBuildCommandLine>make Assignment1.01</RemoteBuildCommandLine>
   </PropertyGroup>
   <ItemGroup>
     <ClCompile Include="CHANGELOG" />

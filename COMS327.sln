@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27130.2010
+VisualStudioVersion = 15.0.27130.2020
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Homework1", "Homework1\Homework1.vcxproj", "{88656A7C-3FA1-4344-AC8A-1CB1184090E6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Assignment0", "Assignment0\Assignment0.vcxproj", "{88656A7C-3FA1-4344-AC8A-1CB1184090E6}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Assignment0", "Assignment1.01\Assignment1.01.vcxproj", "{02A90B79-7A69-45CF-A5B0-F014E743DF3A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,18 @@ Global
 		{88656A7C-3FA1-4344-AC8A-1CB1184090E6}.Release|x64.Build.0 = Release|x64
 		{88656A7C-3FA1-4344-AC8A-1CB1184090E6}.Release|x86.ActiveCfg = Release|x86
 		{88656A7C-3FA1-4344-AC8A-1CB1184090E6}.Release|x86.Build.0 = Release|x86
+		{02A90B79-7A69-45CF-A5B0-F014E743DF3A}.Debug|ARM.ActiveCfg = Debug|ARM
+		{02A90B79-7A69-45CF-A5B0-F014E743DF3A}.Debug|ARM.Build.0 = Debug|ARM
+		{02A90B79-7A69-45CF-A5B0-F014E743DF3A}.Debug|x64.ActiveCfg = Debug|x64
+		{02A90B79-7A69-45CF-A5B0-F014E743DF3A}.Debug|x64.Build.0 = Debug|x64
+		{02A90B79-7A69-45CF-A5B0-F014E743DF3A}.Debug|x86.ActiveCfg = Debug|x86
+		{02A90B79-7A69-45CF-A5B0-F014E743DF3A}.Debug|x86.Build.0 = Debug|x86
+		{02A90B79-7A69-45CF-A5B0-F014E743DF3A}.Release|ARM.ActiveCfg = Release|ARM
+		{02A90B79-7A69-45CF-A5B0-F014E743DF3A}.Release|ARM.Build.0 = Release|ARM
+		{02A90B79-7A69-45CF-A5B0-F014E743DF3A}.Release|x64.ActiveCfg = Release|x64
+		{02A90B79-7A69-45CF-A5B0-F014E743DF3A}.Release|x64.Build.0 = Release|x64
+		{02A90B79-7A69-45CF-A5B0-F014E743DF3A}.Release|x86.ActiveCfg = Release|x86
+		{02A90B79-7A69-45CF-A5B0-F014E743DF3A}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
