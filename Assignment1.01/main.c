@@ -55,7 +55,7 @@ void create_dungeon()
 {
 	int n = 0;
 
-	while (n <= 3)
+	while (n < 5)
 	{
 		int rand_x_pos = rand() % 19 + 1;
 		int rand_y_pos = rand() % 78 + 1;
@@ -72,18 +72,37 @@ void create_dungeon()
 	}
 }
 
-// Fix Placing Bugs
 bool can_place(int x_pos, int y_pos, int x_size, int y_size)
 {
-	if (x_pos + 1 > 20 || y_pos + 1 > 80)
+	if (x_pos + x_size - 1 >= 20 || y_pos + y_size - 1 >= 80)
 	{
 		return false;
 	}
 
-	for (int i = x_pos; i < x_pos + x_size + 1; i++)
+	for (int i = x_pos; i < x_pos + x_size; i++)
 	{
-		for (int j = y_pos; j < y_pos + y_size + 1; j++)
+		for (int j = y_pos; j < y_pos + y_size; j++)
 		{
+			if (screen[i+1][j] == '.')
+			{
+				return false;
+			}
+
+			if (screen[i - 1][j] == '.')
+			{
+				return false;
+			}
+
+			if (screen[i][j + 1] == '.')
+			{
+				return false;
+			}
+
+			if (screen[i][j - 1] == '.')
+			{
+				return false;
+			}
+
 			if (screen[i][j] == '.')
 			{
 				return false;
