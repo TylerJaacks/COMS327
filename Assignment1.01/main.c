@@ -33,7 +33,7 @@ int main(int argc, char *argv)
 
 	create_dungeon();
 
-	print_array();
+	draw_screen();
 
 	return 0;
 }
@@ -55,49 +55,43 @@ void create_dungeon()
 {
 	int n = 0;
 
-	while (n <= 5)
+	while (n <= 3)
 	{
-		int rand_x_pos = rand() % 21 + 0;
-		int rand_y_pos = rand() % 80 + 0;
-		int rand_x_size = rand() % 5 + 3;
-		int rand_y_size = rand() % 5 + 3;
+		int rand_x_pos = rand() % 19 + 1;
+		int rand_y_pos = rand() % 78 + 1;
+		int rand_x_size = rand() % 5 + 4;
+		int rand_y_size = rand() % 5 + 4;
 
-		place_room(rand_x_pos, rand_y_pos, rand_x_size, rand_y_size);
-
-		print_array();
-
-		if (!does_conflict(rand_x_pos, rand_y_pos, rand_x_size, rand_y_size))
+		if (can_place(rand_x_pos, rand_y_pos, rand_x_size, rand_y_size))
 		{
+			place_room(rand_x_pos, rand_y_pos, rand_x_size, rand_y_size);
 			room new_room = { rand_x_pos, rand_y_pos, rand_x_size, rand_y_size };
 			n++;
 			dungeon_rooms[n] = new_room;
 		}
-
-		else
-		{
-			init_array();
-
-			memset(dungeon_rooms, 0, sizeof(dungeon_rooms));
-
-			n = 0;
-		}
 	}
 }
 
-bool does_conflict(int x_pos, int y_pos, int x_size, int y_size)
+// Fix Placing Bugs
+bool can_place(int x_pos, int y_pos, int x_size, int y_size)
 {
-	for (int i = x_pos; i < x_pos + x_size; i++)
+	if (x_pos + 1 > 20 || y_pos + 1 > 80)
 	{
-		for (int j = y_pos; j < y_pos + y_size; j++)
+		return false;
+	}
+
+	for (int i = x_pos; i < x_pos + x_size + 1; i++)
+	{
+		for (int j = y_pos; j < y_pos + y_size + 1; j++)
 		{
 			if (screen[i][j] == '.')
 			{
-				return true;
+				return false;
 			}
 		}
 	}
 
-	return false;
+	return true;
 }
 
 void init_array()
@@ -111,7 +105,13 @@ void init_array()
 	}
 }
 
-void print_array()
+// TODO Implement
+void place_corridors()
+{
+
+}
+
+void draw_screen()
 {
 	for (int i = 0; i < 21; i++)
 	{
