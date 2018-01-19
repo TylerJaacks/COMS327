@@ -30,5 +30,12 @@
 *.exe
 *.out
 *.app
+
+# Other
+*.log
 /.vs/COMS327/v15
 /Homework1/obj/ARM/Debug
+/Assignment0
+/Assignment1.01/bin/x64/Debug
+/Assignment1.01/obj/x64/Debug/Assignment1.01.log
+/Assignment1.01/obj/x64/Debug

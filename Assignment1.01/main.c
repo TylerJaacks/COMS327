@@ -21,27 +21,26 @@ typedef struct
 
 char screen[21][80];
 
+room dungeon_rooms[5];
+
+dungeon game_dungeon;
+
 int main(int argc, char *argv)
 {
 	srand(time(NULL));
 
-	int rand_x_pos = rand() % 10 + 1;
-	int rand_y_pos = rand() % 10 + 1;
-	int rand_x_size = rand() % 10 + 1;
-	int rand_y_size = rand() % 10 + 1;
-
 	init_array();
 
-	place_room(rand_x_pos, rand_y_pos, 5, 5);
+	create_dungeon();
 
 	print_array();
 
 	return 0;
 }
 
-void place_room(int x_pos, int y_pos, int x_size, int y_size)
+room place_room(int x_pos, int y_pos, int x_size, int y_size)
 {
-	printf("x_pos: %d y_pos: %d x_size: %d y_size: %d \n", x_pos, y_pos, x_size, y_size);
+	room new_room = {x_pos, y_pos, x_size, y_size};
 
 	for (int i = x_pos; i < x_pos + x_size; i++)
 	{
@@ -52,9 +51,53 @@ void place_room(int x_pos, int y_pos, int x_size, int y_size)
 	}
 }
 
-bool does_conflict()
+void create_dungeon()
 {
+	int n = 0;
 
+	while (n <= 5)
+	{
+		int rand_x_pos = rand() % 21 + 0;
+		int rand_y_pos = rand() % 80 + 0;
+		int rand_x_size = rand() % 5 + 3;
+		int rand_y_size = rand() % 5 + 3;
+
+		place_room(rand_x_pos, rand_y_pos, rand_x_size, rand_y_size);
+
+		print_array();
+
+		if (!does_conflict(rand_x_pos, rand_y_pos, rand_x_size, rand_y_size))
+		{
+			room new_room = { rand_x_pos, rand_y_pos, rand_x_size, rand_y_size };
+			n++;
+			dungeon_rooms[n] = new_room;
+		}
+
+		else
+		{
+			init_array();
+
+			memset(dungeon_rooms, 0, sizeof(dungeon_rooms));
+
+			n = 0;
+		}
+	}
+}
+
+bool does_conflict(int x_pos, int y_pos, int x_size, int y_size)
+{
+	for (int i = x_pos; i < x_pos + x_size; i++)
+	{
+		for (int j = y_pos; j < y_pos + y_size; j++)
+		{
+			if (screen[i][j] == '.')
+			{
+				return true;
+			}
+		}
+	}
+
+	return false;
 }
 
 void init_array()
