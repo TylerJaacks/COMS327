@@ -1,7 +1,0 @@
-﻿  Validating sources
-  Copying sources remotely to 'pyrite.cs.iastate.edu'
-C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\Common7\IDE\VC\VCTargets\Application Type\Linux\1.0\Linux.Makefile.Targets(130,5): warning : Build command not configured. Skipping...
-  Invoking 'make Assignment0', working directory: '/home/tjaacks/COMS327/Assignment0'
-  make: Nothing to be done for 'Assignment0'.
-  
-  Copying file '/home/tjaacks/COMS327/Assignment0/Assignment0' to 'D:\Documents\Visual Studio 2017\Projects\COMS327\Assignment0\bin\x64\Debug\Assignment0'
