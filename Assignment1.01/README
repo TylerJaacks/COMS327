@@ -1,1 +1,4 @@
-Draws random dungeons with random rooms.
+Generates random rooms with corridors in a dungeon if no switches are used. 
+Loads random room with the switch -l and loads any file named dungeon.rlg327 in your .rlg327 folder. 
+Saves a room by using the -s switch.
+Loads a room and saves the room with the switch -l and -s.
