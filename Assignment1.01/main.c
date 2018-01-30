@@ -44,16 +44,16 @@ void read_binary(FILE *file, file_format *data)
 	strcpy(p, getenv("HOME"));
 	strcat(p, "/.rlg327/1521618087.rlg327");
 
-	file = fopen(p, "rb");
+	file = fopen(p, "r");
 
-	free(p);
-
-	char file_type[13];
+	uint32_t file_size;
 
 	fread(&data->file_type, sizeof(char), 12, file);
-	fread(&data->file_version, 1, sizeof(uint32_t), file);
-	// TODO Fix Size.
+	fread(&data->file_version, sizeof(uint32_t), 1, file);
 	fread(&data->file_size, sizeof(uint32_t), 1, file);
+
+	data->file_size = be32toh(data->file_size);
+
 	// TODO Fix Hardness.
 	fread(&data->file_hardness, sizeof(data->file_hardness), 1, file);
 	// TODO Add Rooms and Replace 5 with the number of rooms.
@@ -63,6 +63,7 @@ void read_binary(FILE *file, file_format *data)
 	}
 
 	fclose(file);
+	free(p);
 }
 
 void load_dungeon(FILE *file, file_format *format)
@@ -72,7 +73,7 @@ void load_dungeon(FILE *file, file_format *format)
 	// TODO Set hardness from the struct.
 	// TODO Place rooms from the struct.
 	printf("File Type: %s\n", format->file_type);
-	printf("File Version: %d\n", format->file_version);
+	printf("File Version: %u\n", format->file_version);
 	printf("File Size: %d\n", format->file_size);
 }
 
