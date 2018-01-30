@@ -1,249 +1,99 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
-#include <time.h>
+#include <stdint.h>
+#include <string.h>
+#include <endian.h>
 
-typedef int bool;
-#define true 1
-#define false 0
+#define byte_t unsigned char
 
-typedef struct
-{
-	int x_pos;
-	int y_pos;
-	int x_size;
-	int y_size;
+typedef struct {
+	uint8_t x_pos;
+	uint8_t y_pos;
+	uint8_t x_size;
+	uint8_t y_size;
 } room;
 
-typedef struct
-{
-	room rooms[5];
-	int hardness[21][80]
-} dungeon;
-
-char screen[21][80];
-int hardness[21][80];
-
-room dungeon_rooms[5];
-dungeon game_dungeon;
+typedef struct {
+	char file_type[12]; // RLG327-S201 first 0-11 bytes.
+	uint32_t file_version; // File version (0) the next 12-15 bytes.
+	uint32_t file_size; // File size the next 16-19 bytes.
+	char file_hardness[21][80]; // Matrix of hardness of each cell, the next 20–1699 bytes.
+	room file_rooms[]; //  Array of rooms in the dungeon, the next 1700–end bytes.
+} file_format;
 
 int main(int argc, char *argv)
 {
-	int q = time(NULL);
-	int i = 1516752056;
+	FILE *file;
+	file_format *format;
 
-	printf("%i", i);
+	char *hardness[21][80];
 
-	srand(q);
+	int number_of_rooms = 5;
+	int size = (20 * sizeof(byte_t)) + ((80 * sizeof(byte_t)) * (21 * sizeof(byte_t))) + (4 * number_of_rooms);
 
-	init_array();
-
-	create_dungeon();
-
-	draw_screen();
-
-	//game_dungeon{ dungeon_rooms, hardness };
+	load_dungeon(file, hardness);
 
 	return 0;
 }
 
-room place_room(int x_pos, int y_pos, int x_size, int y_size)
+void read_binary(FILE *file, file_format *data)
 {
-	room new_room = {x_pos, y_pos, x_size, y_size};
+	int length = strlen(getenv("HOME")) + strlen("/.rlg327/hello.rlg327") + 1;
+	char *p = malloc(length * sizeof(char));
 
-	for (int i = x_pos; i < x_pos + x_size; i++)
+	strcpy(p, getenv("HOME"));
+	strcat(p, "/.rlg327/1521618087.rlg327");
+
+	file = fopen(p, "rb");
+
+	free(p);
+
+	char file_type[13];
+
+	fread(&data->file_type, sizeof(char), 12, file);
+	fread(&data->file_version, 1, sizeof(uint32_t), file);
+	// TODO Fix Size.
+	fread(&data->file_size, sizeof(uint32_t), 1, file);
+	// TODO Fix Hardness.
+	fread(&data->file_hardness, sizeof(data->file_hardness), 1, file);
+	// TODO Add Rooms and Replace 5 with the number of rooms.
+	for (int i = 0; i < 5; i++)
 	{
-		for (int j = y_pos; j < y_pos + y_size; j++)
-		{
-			screen[i][j] = '.';
-		}
+
 	}
+
+	fclose(file);
 }
 
-void create_dungeon()
+void load_dungeon(FILE *file, file_format *format)
 {
-	int n = 0;
+	read_binary(file, format);
 
-	while (n < 5)
-	{
-		int rand_x_pos = rand() % 78 + 1;
-		int rand_y_pos = rand() % 19 + 1;
-		int rand_x_size = rand() % 5 + 4;
-		int rand_y_size = rand() % 5 + 4;
-
-		if (can_place(rand_x_pos, rand_y_pos, rand_x_size, rand_y_size))
-		{
-			place_room(rand_x_pos, rand_y_pos, rand_x_size, rand_y_size);
-
-			room new_room = { rand_x_pos, rand_y_pos, rand_x_size, rand_y_size };
-
-			dungeon_rooms[n] = new_room;
-			
-			n++;
-		}
-	}
-
-	place_corridors();
+	// TODO Set hardness from the struct.
+	// TODO Place rooms from the struct.
+	printf("File Type: %s\n", format->file_type);
+	printf("File Version: %d\n", format->file_version);
+	printf("File Size: %d\n", format->file_size);
 }
 
-bool can_place(int x_pos, int y_pos, int x_size, int y_size)
+void write_binary(FILE *file, file_format *data)
 {
-	if (x_pos + x_size - 1 >= 20 || y_pos + y_size - 1 >= 80)
-	{
-		return false;
-	}
+	int length = strlen(getenv("HOME")) + strlen("/.rlg327/dungeon.rlg327") + 1;
+	char *p = malloc(length * sizeof(char));
 
-	for (int i = x_pos; i < x_pos + x_size; i++)
-	{
-		for (int j = y_pos; j < y_pos + y_size; j++)
-		{
-			if (screen[i+1][j] == '.')
-			{
-				return false;
-			}
+	strcpy(p, getenv("HOME"));
+	strcat(p, "/.rlg327/dungeon.rlg327");
 
-			if (screen[i - 1][j] == '.')
-			{
-				return false;
-			}
+	file = fopen(p, "wb");
 
-			if (screen[i][j + 1] == '.')
-			{
-				return false;
-			}
+	free(p);
 
-			if (screen[i][j - 1] == '.')
-			{
-				return false;
-			}
+	// TODO Save Struct to Disk
 
-			if (screen[i][j] == '.')
-			{
-				return false;
-			}
-		}
-	}
-
-	return true;
+	fclose(file);
 }
 
-void init_array()
+void save_dungeon(FILE *file, file_format *data)
 {
-	for (int i = 0; i < 21; i++)
-	{
-		for (int j = 0; j < 80; j++)
-		{
-			screen[i][j] = ' ';
-		}
-	}
-}
-
-// TODO Implement
-void place_corridors()
-{
-	int n = 0;
-
-	while (n < 1)
-	{
-		// Calculate centers of each room.
-		int room1_center_x = ((dungeon_rooms[n].x_pos + dungeon_rooms[n].x_size + dungeon_rooms[n].x_pos) / 2);
-		int room1_center_y = ((dungeon_rooms[n].y_pos + dungeon_rooms[n].y_size + dungeon_rooms[n].y_pos) / 2);
-
-		int room2_center_x = ((dungeon_rooms[n + 1].x_pos + dungeon_rooms[n + 1].x_size + dungeon_rooms[n + 1].x_pos) / 2);
-		int room2_center_y = ((dungeon_rooms[n + 1].y_pos + dungeon_rooms[n + 1].y_size + dungeon_rooms[n + 1].x_pos) / 2);
-
-		// Calculate the distance between both rooms.
-		int room_x_distance = abs(room1_center_x - room2_center_x);
-		int room_y_distance = abs(room1_center_y - room2_center_y);
-
-		int half_x_distance = room_x_distance / 2;
-		int half_y_distance = room_y_distance / 2;
-
-		// Check if room is to the left or right or same.
-		if (room1_center_x > room2_center_x)
-		{
-			for (int i = room1_center_x; i >= room2_center_x; i--)
-			{
-				if (screen[room1_center_y][i] != '.')
-				{
-					screen[room1_center_y][i] = '#';
-				}
-			}
-		}
-
-		if (room1_center_x < room2_center_x)
-		{
-			for (int i = room1_center_x; i > room2_center_x; i--)
-			{
-				if (screen[room1_center_y][i] != '.')
-				{
-					screen[room1_center_y][i] = '#';
-				}
-			}
-		}
-
-		if (room1_center_y > room2_center_y)
-		{
-			printf("%i", room1_center_y);
-
-			for (int i = room1_center_y; i >= room2_center_y; i--)
-			{
-				if (screen[i][room2_center_x] != '.')
-				{
-					screen[i][room2_center_x] = '#';
-				}
-			}
-		}
-
-		if (room1_center_y > room2_center_y)
-		{
-		}
-
-		// Travel the remaining x or y distance. 
-		if (room1_center_x > room2_center_x)
-		{
-			for (int i = half_x_distance; i >= room2_center_x; i--)
-			{
-				if (screen[room2_center_y][i] != '.')
-				{
-					screen[room2_center_y][i] = '#';
-				}
-			}
-		}
-
-
-		n++;
-	}
-}
-
-void generate_hardness()
-{
-	for (int i = 0; i < 21; i++)
-	{
-		for (int j = 0; j < 80; j++)
-		{
-			if (screen[i][j] == '.' || screen[i][j] == '#')
-			{
-				hardness[i][j] = 0;
-			}
-
-			else
-			{
-				hardness[i][j] = rand() % 255 + 1;
-			}
-		}
-	}
-}
-
-void draw_screen()
-{
-	for (int i = 0; i < 21; i++)
-	{
-		for (int j = 0; j < 80; j++)
-		{
-			printf("%c", screen[i][j]);
-		}
-
-		printf("\n");
-	}
+	write_binary(file, data);
 }

@@ -27,15 +27,15 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{02A90B79-7A69-45CF-A5B0-F014E743DF3A}</ProjectGuid>
+    <ProjectGuid>{A9DE59E2-EC88-441D-B641-25B769A6FDF5}</ProjectGuid>
     <Keyword>Linux</Keyword>
-    <RootNamespace>Assignment1.01</RootNamespace>
+    <RootNamespace>Assignment1.02</RootNamespace>
     <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
     <ApplicationType>Linux</ApplicationType>
     <ApplicationTypeRevision>1.0</ApplicationTypeRevision>
     <TargetLinuxPlatform>Generic</TargetLinuxPlatform>
     <LinuxProjectType>{FC1A4D80-50E9-41DA-9192-61C0DBAA00D2}</LinuxProjectType>
-    <ProjectName>Assignment1.02</ProjectName>
+    <ProjectName>Assignment1.01</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
@@ -74,42 +74,30 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <RemoteBuildCommandLine>make Assignment1.02</RemoteBuildCommandLine>
+    <RemoteBuildCommandLine>make Assignment1.01</RemoteBuildCommandLine>
     <BuildCommandLine>
     </BuildCommandLine>
-    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.02/Assignment1.02</RemoteBuildOutputs>
-    <AdditionalSourcesToCopyMapping>
-    </AdditionalSourcesToCopyMapping>
+    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.01/Assignment1.01</RemoteBuildOutputs>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
-    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.02/Assignment1.02</RemoteBuildOutputs>
-    <RemoteBuildCommandLine>make Assignment1.02</RemoteBuildCommandLine>
-    <AdditionalSourcesToCopyMapping>
-    </AdditionalSourcesToCopyMapping>
+    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.01/Assignment1.01</RemoteBuildOutputs>
+    <RemoteBuildCommandLine>make Assignment1.01</RemoteBuildCommandLine>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
-    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.02/Assignment1.02</RemoteBuildOutputs>
-    <RemoteBuildCommandLine>make Assignment1.02</RemoteBuildCommandLine>
-    <AdditionalSourcesToCopyMapping>
-    </AdditionalSourcesToCopyMapping>
+    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.01/Assignment1.01</RemoteBuildOutputs>
+    <RemoteBuildCommandLine>make Assignment1.01</RemoteBuildCommandLine>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.02/Assignment1.02</RemoteBuildOutputs>
-    <RemoteBuildCommandLine>make Assignment1.02</RemoteBuildCommandLine>
-    <AdditionalSourcesToCopyMapping>
-    </AdditionalSourcesToCopyMapping>
+    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.01/Assignment1.01</RemoteBuildOutputs>
+    <RemoteBuildCommandLine>make Assignment1.01</RemoteBuildCommandLine>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
-    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.02/Assignment1.02</RemoteBuildOutputs>
-    <RemoteBuildCommandLine>make Assignment1.02</RemoteBuildCommandLine>
-    <AdditionalSourcesToCopyMapping>
-    </AdditionalSourcesToCopyMapping>
+    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.01/Assignment1.01</RemoteBuildOutputs>
+    <RemoteBuildCommandLine>make Assignment1.01</RemoteBuildCommandLine>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
-    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.02/Assignment1.02</RemoteBuildOutputs>
-    <RemoteBuildCommandLine>make Assignment1.02</RemoteBuildCommandLine>
-    <AdditionalSourcesToCopyMapping>
-    </AdditionalSourcesToCopyMapping>
+    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.01/Assignment1.01</RemoteBuildOutputs>
+    <RemoteBuildCommandLine>make Assignment1.01</RemoteBuildCommandLine>
   </PropertyGroup>
   <ItemGroup>
     <ClCompile Include="CHANGELOG" />
