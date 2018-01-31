@@ -13,9 +13,8 @@ typedef int bool;
 #define byte_t unsigned char
 
 // TODO Fix saving files.
-// TODO Fix copying hardness.
 // TODO Draw coridors.
-// TODO Command line switches.
+// TODO Fix random hardness generation.
 
 typedef struct {
 	uint8_t x_pos;
@@ -28,31 +27,27 @@ typedef struct {
 	char file_type[12];
 	uint32_t file_version;
 	uint32_t file_size;
-	char file_hardness[21][80];
+	char file_hardness[21][81];
+	room *rooms;
 } file_format;
 
-typedef struct
-{
-	room rooms[5];
-	int hardness[21][80]
-} dungeon;
-
 char screen[21][80];
-int hardness[21][80];
+char hardness[21][81];
 
-dungeon game_dungeon;
 room *dungeon_rooms;
 
 int number_of_rooms;
-int size;
+uint32_t size;
 
-int main(int argc, char *argv)
+int main(int argc, char *argv[])
 {
+	FILE *file;
+	file_format *format;
+
 	number_of_rooms = 5;
 
 	dungeon_rooms = calloc(number_of_rooms, sizeof(room));
 
-	// TODO Get arguments working.
 	if (argc == 1)
 	{
 		srand(time(NULL));
@@ -61,19 +56,39 @@ int main(int argc, char *argv)
 
 		create_dungeon();
 
+		generate_hardness();
+
 		draw_screen();
-	}
-
-	else
-	{
-		FILE *file;
-		file_format *format;
-
-		size = (20 * sizeof(byte_t)) + ((80 * sizeof(byte_t)) * (21 * sizeof(byte_t))) + (4 * number_of_rooms);
-
-		load_dungeon(file, hardness);
 
 		save_dungeon(file, format);
+	}
+
+	else 
+	{
+		if (!strcmp(argv[1], "-l"))
+		{
+			load_dungeon(file, format);
+		}
+
+		else if (!strcmp(argv[1], "-s"))
+		{
+			srand(time(NULL));
+
+			init_array();
+
+			create_dungeon();
+
+			generate_hardness();
+
+			draw_screen();
+
+			save_dungeon(file, format);
+		}
+
+		else
+		{
+			printf("Bad arguments!\n");
+		}
 	}
 
 	return 0;
@@ -163,9 +178,10 @@ void init_array()
 {
 	for (int i = 0; i < 21; i++)
 	{
-		for (int j = 0; j < 80; j++)
+		for (int j = 0; j < 81; j++)
 		{
 			screen[i][j] = ' ';
+			hardness[i][j] = '0';
 		}
 	}
 }
@@ -183,13 +199,26 @@ void draw_screen()
 	}
 }
 
+void draw_hardness(file_format *data)
+{
+	for (int i = 0; i < 21; i++)
+	{
+		for (int j = 0; j < 80; j++)
+		{
+			printf("%i ", &data->file_hardness[i][j]);
+		}
+
+		printf("\n");
+	}
+}
+
 void read_binary(FILE *file, file_format *data)
 {
-	int length = strlen(getenv("HOME")) + strlen("/.rlg327/hello.rlg327") + 1;
+	int length = strlen(getenv("HOME")) + strlen("/.rlg327/1523530501.rlg327") + 1;
 	char *p = malloc(length * sizeof(char));
 
 	strcpy(p, getenv("HOME"));
-	strcat(p, "/.rlg327/1521618087.rlg327");
+	strcat(p, "/.rlg327/1523530501.rlg327");
 
 	file = fopen(p, "r");
 
@@ -199,7 +228,7 @@ void read_binary(FILE *file, file_format *data)
 
 	data->file_size = be32toh(data->file_size);
 
-	fread(&data->file_hardness, sizeof(char), 21*80, file);
+	fread(data->file_hardness, sizeof(char), 21*80, file);
 
 	number_of_rooms = (data->file_size - 1699) / sizeof(room);
 
@@ -213,9 +242,6 @@ void load_dungeon(FILE *file, file_format *format)
 	read_binary(file, format);
 
 	init_array();
-
-	// TODO Fix copying hardness
-	memcpy(hardness, &format->file_hardness, sizeof(format->file_hardness));
 
 	for (int i = 0; i < number_of_rooms; i++) {
 		place_room(dungeon_rooms[i].x_pos, dungeon_rooms[i].y_pos, dungeon_rooms[i].x_size, dungeon_rooms[i].y_size);
@@ -234,16 +260,19 @@ void write_binary(FILE *file, file_format *data)
 	strcpy(p, getenv("HOME"));
 	strcat(p, "/.rlg327/dungeon.rlg327");
 
-	file = fopen(p, "wa");
+	file = fopen(p, "w");
 
 	char *marker = "RLG327-S2018";
-	int version = 0;
+	uint32_t version = 0;
 	
 	fwrite(marker, sizeof(char), 12, file);
-	fwrite(version, sizeof(uint32_t), 1, file);
-	fwrite(size, sizeof(uint32_t), 1, file);
-	fwrite(hardness, sizeof(hardness), 1, file);
-	fwrite(dungeon_rooms, sizeof(room), number_of_rooms, file);
+	fwrite(&version, sizeof(uint32_t), 1, file);
+
+	size = (20 * sizeof(byte_t)) + ((80 * sizeof(byte_t)) * (21 * sizeof(byte_t))) + (4 * number_of_rooms);
+
+	fwrite(&size, sizeof(uint32_t), 1, file);
+
+	printf("%d \n", size);
 }
 
 void save_dungeon(FILE *file, file_format *data)
@@ -251,23 +280,29 @@ void save_dungeon(FILE *file, file_format *data)
 	write_binary(file, data);
 }
 
-// TODO Implement this.
 void place_corridors()
 {
 
 }
 
-// TODO Fix this.
 void generate_hardness()
 {
 	for (int i = 0; i < 21; i++)
 	{
 		for (int j = 0; j < 80; j++)
 		{
-			if (screen[i][j] == '#' || screen[i][j] == '.') {
+			if (screen[i][j] == '.') 
+			{
 				hardness[i][j] = '0';
 			}
-			else {
+
+			else if (screen[i][j] == '#')
+			{
+				hardness[i][j] = '0';
+			}
+
+			else 
+			{
 				int rand_hardness = rand() % 255;
 
 				hardness[i][j] = rand_hardness;
