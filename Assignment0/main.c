@@ -6,7 +6,7 @@ typedef int bool;
 #define true 1
 #define false 0
 
-int size = 8;
+int queue_size = 8;
 
 int board[8][8] = {
 	{ 0 },{ 0 },{ 0 },{ 0 },
@@ -28,18 +28,18 @@ int main(int argc, char* argv)
 
 void get_solutions(int col)
 {
-	if (col >= size)
+	if (col >= queue_size)
 	{
 		return;
 	}
 
-	for (int i = 0; i < size; i++)
+	for (int i = 0; i < queue_size; i++)
 	{
 		if (cant_attack(i, col))
 		{
 			board[i][col] = 1;
 			
-			if (col == size - 1) 
+			if (col == queue_size - 1) 
 			{
 				print_solutions(8);
 
@@ -82,7 +82,7 @@ bool cant_attack(int row, int col)
 	int k = row;
 	int l = col;
 
-	while (k < size && l >= 0)
+	while (k < queue_size && l >= 0)
 	{
 		if (board[k][l] == 1)
 		{

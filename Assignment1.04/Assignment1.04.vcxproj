@@ -27,15 +27,14 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{88656a7c-3fa1-4344-ac8a-1cb1184090e6}</ProjectGuid>
+    <ProjectGuid>{48f0c29c-bd7c-405b-83a6-82bf297f9864}</ProjectGuid>
     <Keyword>Linux</Keyword>
-    <RootNamespace>Assignment0</RootNamespace>
+    <RootNamespace>Assignment1_04</RootNamespace>
     <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
     <ApplicationType>Linux</ApplicationType>
     <ApplicationTypeRevision>1.0</ApplicationTypeRevision>
     <TargetLinuxPlatform>Generic</TargetLinuxPlatform>
     <LinuxProjectType>{FC1A4D80-50E9-41DA-9192-61C0DBAA00D2}</LinuxProjectType>
-    <ProjectName>Assignment0</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
@@ -73,81 +72,40 @@
   <ImportGroup Label="Shared" />
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <RemoteBuildCommandLine>make Assignment0</RemoteBuildCommandLine>
-    <BuildCommandLine>
-    </BuildCommandLine>
-    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment0/Assignment0</RemoteBuildOutputs>
-    <AdditionalSourcesToCopyMapping>$(AdditionalSourcesToCopyMapping)</AdditionalSourcesToCopyMapping>
-    <ReBuildCommandLine>
-    </ReBuildCommandLine>
-    <CleanCommandLine>
-    </CleanCommandLine>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
-    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment0/Assignment0</RemoteBuildOutputs>
-    <RemoteBuildCommandLine>make Assignment0</RemoteBuildCommandLine>
-    <AdditionalSourcesToCopyMapping>$(AdditionalSourcesToCopyMapping)</AdditionalSourcesToCopyMapping>
-    <BuildCommandLine>
-    </BuildCommandLine>
-    <ReBuildCommandLine>
-    </ReBuildCommandLine>
-    <CleanCommandLine>
-    </CleanCommandLine>
+    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.04/Assignment1.04</RemoteBuildOutputs>
+    <RemoteBuildCommandLine>make Assignment1.04</RemoteBuildCommandLine>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
-    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment0/Assignment0</RemoteBuildOutputs>
-    <RemoteBuildCommandLine>make Assignment0</RemoteBuildCommandLine>
-    <AdditionalSourcesToCopyMapping>$(AdditionalSourcesToCopyMapping)</AdditionalSourcesToCopyMapping>
-    <BuildCommandLine>
-    </BuildCommandLine>
-    <ReBuildCommandLine>
-    </ReBuildCommandLine>
-    <CleanCommandLine>
-    </CleanCommandLine>
+    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.04/Assignment1.04</RemoteBuildOutputs>
+    <RemoteBuildCommandLine>make Assignment1.04</RemoteBuildCommandLine>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.04/Assignment1.04</RemoteBuildOutputs>
+    <RemoteBuildCommandLine>make Assignment1.04</RemoteBuildCommandLine>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment0/Assignment0</RemoteBuildOutputs>
-    <RemoteBuildCommandLine>make Assignment0</RemoteBuildCommandLine>
-    <AdditionalSourcesToCopyMapping>$(AdditionalSourcesToCopyMapping)</AdditionalSourcesToCopyMapping>
-    <BuildCommandLine>
-    </BuildCommandLine>
-    <ReBuildCommandLine>
-    </ReBuildCommandLine>
-    <CleanCommandLine>
-    </CleanCommandLine>
+    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.04/Assignment1.04</RemoteBuildOutputs>
+    <RemoteBuildCommandLine>make Assignment1.04</RemoteBuildCommandLine>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
-    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment0/Assignment0</RemoteBuildOutputs>
-    <RemoteBuildCommandLine>make Assignment0</RemoteBuildCommandLine>
-    <AdditionalSourcesToCopyMapping>$(AdditionalSourcesToCopyMapping)</AdditionalSourcesToCopyMapping>
-    <BuildCommandLine>
-    </BuildCommandLine>
-    <ReBuildCommandLine>
-    </ReBuildCommandLine>
-    <CleanCommandLine>
-    </CleanCommandLine>
+    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.04/Assignment1.04</RemoteBuildOutputs>
+    <RemoteBuildCommandLine>make Assignment1.04</RemoteBuildCommandLine>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
-    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment0/Assignment0</RemoteBuildOutputs>
-    <RemoteBuildCommandLine>make Assignment0</RemoteBuildCommandLine>
-    <AdditionalSourcesToCopyMapping>$(AdditionalSourcesToCopyMapping)</AdditionalSourcesToCopyMapping>
-    <BuildCommandLine>
-    </BuildCommandLine>
-    <ReBuildCommandLine>
-    </ReBuildCommandLine>
-    <CleanCommandLine>
-    </CleanCommandLine>
+    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.04/Assignment1.04</RemoteBuildOutputs>
+    <RemoteBuildCommandLine>make Assignment1.04</RemoteBuildCommandLine>
   </PropertyGroup>
   <ItemGroup>
-    <ClCompile Include="CHANGELOG" />
     <ClCompile Include="main.c" />
+    <ClCompile Include="README" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="CHANGELOG" />
     <Text Include="Makefile" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Assignment1.01\README" />
+    <ClInclude Include="priority_queue.h" />
   </ItemGroup>
   <ItemDefinitionGroup />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -37,7 +37,7 @@ char hardness[21][81];
 room *dungeon_rooms;
 
 int number_of_rooms;
-uint32_t size;
+uint32_t queue_size;
 
 int main(int argc, char *argv[])
 {
@@ -214,11 +214,11 @@ void draw_hardness(file_format *data)
 
 void read_binary(FILE *file, file_format *data)
 {
-	int length = strlen(getenv("HOME")) + strlen("/.rlg327/1523530501.rlg327") + 1;
+	int length = strlen(getenv("HOME")) + strlen("/.rlg327/1521618087.rlg327") + 1;
 	char *p = malloc(length * sizeof(char));
 
 	strcpy(p, getenv("HOME"));
-	strcat(p, "/.rlg327/1523530501.rlg327");
+	strcat(p, "/.rlg327/1521618087.rlg327");
 
 	file = fopen(p, "r");
 
@@ -230,7 +230,7 @@ void read_binary(FILE *file, file_format *data)
 
 	fread(data->file_hardness, sizeof(char), 21*80, file);
 
-	number_of_rooms = (data->file_size - 1699) / sizeof(room);
+	number_of_rooms = (data->file_size - 1700) / sizeof(room);
 
 	fread(dungeon_rooms, sizeof(room), number_of_rooms, file);
 
@@ -268,11 +268,15 @@ void write_binary(FILE *file, file_format *data)
 	fwrite(marker, sizeof(char), 12, file);
 	fwrite(&version, sizeof(uint32_t), 1, file);
 
-	size = (20 * sizeof(byte_t)) + ((80 * sizeof(byte_t)) * (21 * sizeof(byte_t))) + (4 * number_of_rooms);
+	queue_size = (20 * sizeof(byte_t)) + ((80 * sizeof(byte_t)) * (21 * sizeof(byte_t))) + (4 * number_of_rooms);
 
-	fwrite(&size, sizeof(uint32_t), 1, file);
+	fwrite(&queue_size, sizeof(uint32_t), 1, file);
 
-	printf("%d \n", size);
+	fwrite(&hardness, sizeof(hardness), 1, file);
+
+	fwrite(&dungeon_rooms, sizeof(dungeon_rooms), 1, file);
+
+	printf("%d \n", queue_size);
 }
 
 void save_dungeon(FILE *file, file_format *data)
@@ -280,9 +284,68 @@ void save_dungeon(FILE *file, file_format *data)
 	write_binary(file, data);
 }
 
+// Corridor Code courtesy of Jeff Yokup.
 void place_corridors()
 {
+	//int temp, x1, x2, y1, y2;
 
+	//for (temp = 0; temp < number_of_rooms - 1; temp++) {
+	//	x1 = dungeon_rooms[temp].x_pos;
+	//	x2 = dungeon_rooms[temp + 1].x_pos;
+	//	y1 = dungeon_rooms[temp].y_pos;
+	//	y2 = dungeon_rooms[temp + 1].y_pos;
+
+	//	placeHCorridor(x1, x2, y1, y2);
+	//	placeVCorridor(x1, x2, y1, y2);
+	//}
+}
+
+void placeVCorridor(int x1, int x2, int y1, int y2) {
+	//int temp;
+	//if (y1 > y2) { //1 must go up
+	//	for (temp = y1; temp >= y2; temp--) {
+	//		if (screen[temp][x2] == '.') {
+
+	//		}
+	//		else {
+	//			screen[temp][x2] = '#';
+	//		}
+	//	}
+	//}
+	//else if (y1 < y2) { //1 must go down
+	//	for (temp = y1; temp <= y2; temp++) {
+	//		if (screen[temp][x2] == '.') {
+
+	//		}
+	//		else {
+	//			screen[temp][x2] = '#';
+	//		}
+	//	}
+	//}
+}
+
+void placeHCorridor(int x1, int x2, int y1, int y2) {
+	//int temp;
+	//if (x1 > x2) { //1 must go left
+	//	for (temp = x1; temp >= x2; temp--) {
+	//		if (screen[y1][temp] == '.') {
+
+	//		}
+	//		else {
+	//			screen[y1][temp] = '#';
+	//		}
+	//	}
+	//}
+	//else if (x1 < x2) { //1 must go right
+	//	for (temp = x1; temp <= x2; temp++) {
+	//		if (screen[y1][temp] == '.') {
+
+	//		}
+	//		else {
+	//			screen[y1][temp] = '#';
+	//		}
+	//	}
+	//}
 }
 
 void generate_hardness()

@@ -1,0 +1,2 @@
+Creates a distance map for tunneling and non tunneling monsters using Dijkstra's algorithm.
+You don't have to doing anything to get the new features, just use the application as normal (--save and --load)
