@@ -1,2 +1,4 @@
-Assignment1.04: main.c
-	gcc main.c -o Assignment1.04 -g
+dungeon: dungeon.c input.o 
+	gcc -g -o dungeon dungeon.c input.c -I.
+clean :
+	-rm $(objects) dungeon input.o dungeon.o

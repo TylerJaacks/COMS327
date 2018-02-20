@@ -27,7 +27,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{48f0c29c-bd7c-405b-83a6-82bf297f9864}</ProjectGuid>
+    <ProjectGuid>{f5ae8986-6b4b-4839-909f-efb0a4096426}</ProjectGuid>
     <Keyword>Linux</Keyword>
     <RootNamespace>Assignment1_04</RootNamespace>
     <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
@@ -73,38 +73,42 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
-    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.04/Assignment1.04</RemoteBuildOutputs>
-    <RemoteBuildCommandLine>make Assignment1.04</RemoteBuildCommandLine>
+    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.04/dungeon</RemoteBuildOutputs>
+    <RemoteBuildCommandLine>make dungeon</RemoteBuildCommandLine>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
-    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.04/Assignment1.04</RemoteBuildOutputs>
-    <RemoteBuildCommandLine>make Assignment1.04</RemoteBuildCommandLine>
+    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.04/dungeon</RemoteBuildOutputs>
+    <RemoteBuildCommandLine>make dungeon</RemoteBuildCommandLine>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.04/Assignment1.04</RemoteBuildOutputs>
-    <RemoteBuildCommandLine>make Assignment1.04</RemoteBuildCommandLine>
+    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.04/dungeon</RemoteBuildOutputs>
+    <RemoteBuildCommandLine>make dungeon</RemoteBuildCommandLine>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.04/Assignment1.04</RemoteBuildOutputs>
-    <RemoteBuildCommandLine>make Assignment1.04</RemoteBuildCommandLine>
+    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.04/dungeon</RemoteBuildOutputs>
+    <RemoteBuildCommandLine>make dungeon</RemoteBuildCommandLine>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
-    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.04/Assignment1.04</RemoteBuildOutputs>
-    <RemoteBuildCommandLine>make Assignment1.04</RemoteBuildCommandLine>
+    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.04/dungeon</RemoteBuildOutputs>
+    <RemoteBuildCommandLine>make dungeon</RemoteBuildCommandLine>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
-    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.04/Assignment1.04</RemoteBuildOutputs>
-    <RemoteBuildCommandLine>make Assignment1.04</RemoteBuildCommandLine>
+    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.04/dungeon</RemoteBuildOutputs>
+    <RemoteBuildCommandLine>make dungeon</RemoteBuildCommandLine>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="CHANGELOG" />
+    <None Include="Makefile" />
+    <None Include="README" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dungeon.c" />
+    <ClCompile Include="input.c" />
     <ClCompile Include="main.c" />
-    <ClCompile Include="README" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="CHANGELOG" />
-    <Text Include="Makefile" />
-  </ItemGroup>
-  <ItemGroup>
+    <ClInclude Include="dungeon.h" />
+    <ClInclude Include="input.h" />
     <ClInclude Include="priority_queue.h" />
   </ItemGroup>
   <ItemDefinitionGroup />
