@@ -32,6 +32,6 @@ struct Dungeon
 
 } currentDungeon;
 
-void createDungeon();
+void create_dungeon();
 
 #endif 

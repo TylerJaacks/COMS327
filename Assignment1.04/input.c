@@ -227,7 +227,7 @@ void processInput(int argc, char* argv[], struct Dungeon * cur)
 	if (argc == 1)
 	{
 		//printf("Only 1 argument, creating dungeon now");
-		createDungeon();
+		create_dungeon();
 	}
 	else
 	{
@@ -263,7 +263,7 @@ void processInput(int argc, char* argv[], struct Dungeon * cur)
 
 		else
 		{
-			createDungeon();
+			create_dungeon();
 		}
 
 		if (save)

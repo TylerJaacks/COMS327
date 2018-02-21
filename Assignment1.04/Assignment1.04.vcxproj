@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dungeon.h" />
+    <ClInclude Include="helper.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="priority_queue.h" />
   </ItemGroup>

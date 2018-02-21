@@ -6,6 +6,7 @@
 
 #include "dungeon.h"
 #include "input.h"
+#include "helper.h"
 
 #include "priority_queue.h"
 
@@ -18,7 +19,11 @@ struct queue
 };
 
 struct queue newQueue;
-struct queue * qPointer = &newQueue;
+struct queue *qPointer = &newQueue;
+
+heap_t *heap;
+game_t *game;
+player_t player;
 
 int getQueueLength()
 {
@@ -142,7 +147,7 @@ void push_old(struct node * newNode)
 }
 
 // Pops off start node which has the smallest distance value
-struct node * pop_old()
+struct node *pop_old()
 {
 	struct node * nodePointer = NULL;
 	if (qPointer->start == NULL)
@@ -168,25 +173,9 @@ struct node * pop_old()
 
 /* -------------------------------- END QUEUE CODE -------------------------------- */
 
-typedef struct monster
-{
-	char type;
-	int intelligent;
-	int telepathy;
-	int tunneling;
-	int erratic;
-	int speed;
-} monster_t;
-
-typedef struct game
-{
-	int total_turns;
-	int current_turn;
-
-	monster_t *monsters;
-} game_t;
-
 int number_of_monsters;
+
+int backupFloor[21][80];
 
 monster_t *monsters;
 
@@ -196,16 +185,12 @@ void initalize_monsters(game_t *game, heap_t *heap)
 
 	monsters = calloc(number_of_monsters, sizeof(monster_t));
 
-	game->monsters = monsters;
-
 	int n = 0;
 
 	while (n < number_of_monsters)
 	{
 		int rand_x_pos = rand() % 19 + 1;
 		int rand_y_pos = rand() % 78 + 1;
-
-		char monster_type = 'M';
 
 		int rand_intelligent = rand() & 1;
 		int rand_telepathy = rand() & 1;
@@ -216,10 +201,10 @@ void initalize_monsters(game_t *game, heap_t *heap)
 
 		if (can_spawn_monster(game, heap, rand_x_pos, rand_y_pos, rand_tunneling) == 1)
 		{
-			monster_t monster = { monster_type, rand_intelligent, rand_telepathy, rand_tunneling, rand_erratic, rand_speed };
-			monster_t *monster_ptr = { monster_type, rand_intelligent, rand_telepathy, rand_tunneling, rand_erratic, rand_speed };
+			monster_t monster = { rand_x_pos, rand_y_pos, rand_intelligent, rand_telepathy, rand_tunneling, rand_erratic, rand_speed };
+			monster_t *monster_ptr = { rand_x_pos, rand_y_pos, rand_intelligent, rand_telepathy, rand_tunneling, rand_erratic, rand_speed };
 
-			game->monsters[n] = monster;
+			monsters[n] = monster;
 
 			/* 0000 */
 			if (rand_intelligent == 0 && rand_telepathy == 0 && rand_tunneling == 0 && rand_erratic == 0)
@@ -317,10 +302,36 @@ void initalize_monsters(game_t *game, heap_t *heap)
 				currentDungeon.dungeonFloor[rand_x_pos][rand_y_pos] = 19;
 			}
 
-			// TODO Implement Heap
-
 			n++;
 		}
+	}
+}
+
+void move_monster(monster_t monster, int dest_x, int dest_y)
+{
+	if (can_spawn_monster(heap, game, dest_x, dest_y, monster.tunneling))
+	{
+		int type = currentDungeon.dungeonFloor[monster.pos_x][monster.pos_y];
+
+		if (backupFloor[monster.pos_x][monster.pos_y] == 0)
+		{
+			currentDungeon.dungeonFloor[monster.pos_x][monster.pos_y] = 0;
+		}
+
+		if (backupFloor[monster.pos_x][monster.pos_y] == 1)
+		{
+			currentDungeon.dungeonFloor[monster.pos_x][monster.pos_y] = 1;
+		}
+
+		if (backupFloor[monster.pos_x][monster.pos_y] == 2)
+		{
+			currentDungeon.dungeonFloor[monster.pos_x][monster.pos_y] = 2;
+		}
+
+		currentDungeon.dungeonFloor[dest_x][dest_y] = type;
+
+		monster.pos_x = dest_x;
+		monster.pos_y = dest_y;
 	}
 }
 
@@ -759,7 +770,6 @@ void displayDiggingDistanceMap(int playerRow, int playerCol)
 			}
 			else
 			{
-				//printf("%i ",currentDungeon.nodes[row][col].distance);
 				printf("%i", currentDungeon.nodes[row][col].distance % 10);
 			}
 		}
@@ -836,8 +846,7 @@ void compareDistances(int row, int col, int currentDistance, char mapType)
 							printf("ERROR");
 							exit(0);
 						}
-						// printf("rock new distance: %i rocksUpdated: %i   ", currentDungeon.nodes[row][col].distance, rocksUpdated);
-						//printf("!!!Old Distance: %i   New distance: %i  for rock at row: %i col:%i!!!!!!!!\n",oldDistance, newDistance, row, col); 
+
 						struct node * p = &(currentDungeon.nodes[row][col]);
 						push_old(p);
 						rocksUpdated++;
@@ -872,7 +881,7 @@ void compareDistances(int row, int col, int currentDistance, char mapType)
 	}
 }
 
-void updateNeighbors(int row, int col, int currentDistance, char mapType)
+void update_neighbors(int row, int col, int currentDistance, char mapType)
 { //map is D for digging monsters, anything else for nondigging
 	compareDistances((row + 1), col, currentDistance, mapType); //down
 	compareDistances(row, (col + 1), currentDistance, mapType); //right
@@ -884,11 +893,14 @@ void updateNeighbors(int row, int col, int currentDistance, char mapType)
 	compareDistances((row - 1), (col + 1), currentDistance, mapType); //up right
 }
 
-void initDistanceMap(int row, int col, char type)
-{ //D == digging distance map
+void init_distance_map(int row, int col, char type)
+{ 
+	/* D == digging distance map */
 	struct node * currentNode = &currentDungeon.nodes[row][col];
+
 	currentDungeon.nodes[row][col].distance = 0;
 	currentDungeon.nodes[row][col].visited = 1;
+
 	int currentRow = row; int currentCol = col;
 	int nodeCounter = 0; //number of nodes moved through
 
@@ -897,22 +909,25 @@ void initDistanceMap(int row, int col, char type)
 	while (1)
 	{
 		nodeCounter++;
+
 		if (type == 'D')
 		{
-			updateNeighbors(currentRow, currentCol, currentDungeon.nodes[currentRow][currentCol].distance, 'D'); //update distances of neighbors
+			update_neighbors(currentRow, currentCol, currentDungeon.nodes[currentRow][currentCol].distance, 'D'); // update distances of neighbors
 		}
+
 		else
 		{
-			updateNeighbors(currentRow, currentCol, currentDungeon.nodes[currentRow][currentCol].distance, 'Z');//update distances of neighbors
+			update_neighbors(currentRow, currentCol, currentDungeon.nodes[currentRow][currentCol].distance, 'Z'); // update distances of neighbors
 		}
 
 		currentDungeon.nodes[currentRow][currentCol].visited = 1;
 		currentNode = pop_old();
+
 		if (currentNode == NULL)
 		{
-			//printf("Finished\n");
 			break;
 		}
+
 		else
 		{
 			if (currentNode->distance == INT_MAX - 2000)
@@ -920,41 +935,38 @@ void initDistanceMap(int row, int col, char type)
 				printf("pop_old error\n");
 				exit(0);
 			}
-			//printf("\ncurrentNode from pop_old() row: %i col:%i Distance: %i address: %p\n", currentNode->row, currentNode->col,currentNode->distance, &(*currentNode));
+
 			currentRow = currentNode->row;
 			currentCol = currentNode->col;
 		}
 	}
-	//printf("Went through %i nodes\n", nodeCounter);
 }
 
-void placePlayer()
+void player_player()
 {
-	int x, y;
 	int startRoom = (rand() % currentDungeon.numberOfRooms);
-	x = currentDungeon.dungeonRooms[startRoom].xPos;
-	y = currentDungeon.dungeonRooms[startRoom].yPos;
+
+	int x = currentDungeon.dungeonRooms[startRoom].xPos;
+	int y = currentDungeon.dungeonRooms[startRoom].yPos;
+
 	currentDungeon.dungeonFloor[y][x] = 3;
+
+	player.speed = 100;
+	player.pos_x = x;
+	player.pos_y = y;
 }
 
-heap_t *heap;
-game_t *game;
-
-void process_turn()
-{
-
-}
-
-void createDungeon()
+void create_dungeon()
 {
 	initBarrier();
 	generateRooms();
 	generateCorridors();
-	placePlayer();
+	player_player();
+	memcpy(backupFloor, currentDungeon.dungeonFloor, sizeof(currentDungeon.dungeonFloor));
 	initalize_monsters(heap, game);
 }
 
-void initDungeonValues()
+void init_dungeon_values()
 {
 	int row, col;
 	for (row = 0; row < 21; row++)
@@ -971,54 +983,65 @@ void initDungeonValues()
 	}
 }
 
+void process_turn()
+{
+	int rand_x_pos = rand() % 19 + 1;
+	int rand_y_pos = rand() % 78 + 1;
+
+	move_monster(monsters[0], rand_x_pos, rand_y_pos);
+	move_monster(monsters[1], rand_x_pos, rand_y_pos);
+	move_monster(monsters[2], rand_x_pos, rand_y_pos);
+	move_monster(monsters[3], rand_x_pos, rand_y_pos);
+	move_monster(monsters[4], rand_x_pos, rand_y_pos);
+
+	game->total_turns++;
+	game->current_turn++;
+
+	printDungeon();	
+}
+
 int main(int argc, char* argv[])
 {
-	heap = (heap_t *)calloc(1, sizeof(heap_t));
-	game = (game_t *)calloc(1, sizeof(game_t));
+	heap = (heap_t*)calloc(1, sizeof(heap_t));
+	game = (game_t*)calloc(1, sizeof(game_t));
 
-	srand(time(NULL)); //init random seed with current time
+	srand(time(NULL));
 	currentDungeon.numberOfRooms = 0;
-	struct Dungeon * point = &currentDungeon;
-	//printf("NOR: %i\n", point->numberOfRooms);
+
+	struct Dungeon *point = &currentDungeon;
+
 	if (argc > 3)
 	{
-		printf("TOO MANY INPUTS"); //ATTENTION change to print to error buffer
+		printf("TOO MANY INPUTS");
 		return -1;
 	}
+
 	else
 	{
-		initDungeonValues();
-		createDungeon();
-		//processInput(argc, argv, point); //take care of load/save/dungeon creation
+		init_dungeon_values();
+		create_dungeon();
+
+		//processInput(argc, argv, point);
+		
 		printDungeon();
-		int playerRow, playerCol, row, col;
-		for (row = 0; row < 21; row++)
-		{
-			for (col = 0; col < 80; col++)
-			{
-				if (currentDungeon.dungeonFloor[row][col] == 3)
-				{
-					playerRow = row; playerCol = col;
-				}
-			}
-		}
 
-		initDistanceMap(playerRow, playerCol, 'Z');
-		//displayNormalDistanceMap(playerRow, playerCol);
+		process_turn();
 
-		for (row = 0; row < 21; row++)
-		{ //reset visited & distance values
-			for (col = 0; col < 80; col++)
+		init_distance_map(player.pos_x, player.pos_y, 'Z');
+
+		//displayNormalDistanceMap(player.pos_x, player.pos_y);
+
+		for (int row = 0; row < 21; row++)
+		{ 
+			/* Reset visited & distance values */
+			for (int col = 0; col < 80; col++)
 			{
-				currentDungeon.nodes[row][col].distance = INT_MAX - 2000; //to prevent overflow
+				currentDungeon.nodes[row][col].distance = INT_MAX - 2000;
 				currentDungeon.nodes[row][col].visited = 0;
 			}
 		}
 
-		initBarrier();
-
-		initDistanceMap(playerRow, playerCol, 'D'); //infinite loop here
-		//displayDiggingDistanceMap(playerRow, playerCol);
+		//initBarrier();
 
 		return 0;
 	}

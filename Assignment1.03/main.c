@@ -717,7 +717,7 @@ void loadFromDisc()
 	}
 }
 
-void createDungeon()
+void create_dungeon()
 {
 	srand(time(NULL)); 
 
@@ -739,7 +739,7 @@ processInput(int argc, char* argv[])
 
 	if (argc == 1)
 	{
-		createDungeon();
+		create_dungeon();
 	}
 
 	else
@@ -769,7 +769,7 @@ processInput(int argc, char* argv[])
 
 		else
 		{
-			createDungeon();
+			create_dungeon();
 		}
 
 		if (save)
