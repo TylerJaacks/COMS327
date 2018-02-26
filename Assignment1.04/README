@@ -1,0 +1,2 @@
+Generates Random dungeons and places the 10 monsters on the map and moves the monsters to random places.
+There is no --numon switch and the --load and --save has been disabled.

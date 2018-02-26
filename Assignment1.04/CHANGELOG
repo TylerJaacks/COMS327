@@ -1,0 +1,143 @@
+commit 9ab05d19555ade1210c375af4bfbcfdb80bfbf9b
+Author: Tyler Jaacks <tylerjaacks@gmail.com>
+Date:   Tue Feb 20 19:43:49 2018 -0600
+
+    Finished the Assignment1.04!
+
+commit 4ecc47f3b39636dff980ec1d4e7d6abc565f12d4
+Author: Tyler Jaacks <tylerjaacks@gmail.com>
+Date:   Tue Feb 20 00:06:37 2018 -0600
+
+    Got monsters of different type spawning.
+
+commit c09e3acfc9beb1ce71b790bb011c422935585536
+Author: Tyler Jaacks <tylerjaacks@gmail.com>
+Date:   Sun Feb 18 14:36:43 2018 -0600
+
+    Added some stuff.
+
+commit a8946f0afd625cc428d22f71c10caa90061e465f
+Author: Tyler Jaacks <tylerjaacks@gmail.com>
+Date:   Tue Jan 30 19:58:49 2018 -0600
+
+    Add command line switches.
+
+commit c4a417d8fcdba0d8e4efc106ff82c2612f2c3f65
+Author: Tyler Jaacks <tylerjaacks@gmail.com>
+Date:   Tue Jan 30 15:57:54 2018 -0600
+
+    Fixed some bugs.
+
+commit abd92716381c917336b25c7a132eef1b6e81d807
+Author: Tyler Jaacks <tylerjaacks@gmail.com>
+Date:   Tue Jan 30 12:57:55 2018 -0600
+
+    Fixed file size bug.
+
+commit 2901eec8992e05a4b1f1877266ecd92436b4c610
+Author: Tyler Jaacks <tylerjaacks@gmail.com>
+Date:   Mon Jan 29 20:03:52 2018 -0600
+
+    Fixed some shit.
+
+commit 1b67c961053ca7e07e9b709c5ad929258ee979ac
+Author: Tyler Jaacks <tylerjaacks@gmail.com>
+Date:   Tue Jan 23 18:14:22 2018 -0600
+
+    Tried to implement the corridor stuff.
+
+commit 272687bd505d6d69904e1d80a2195e6f9043e5f4
+Author: Tyler Jaacks <tylerjaacks@gmail.com>
+Date:   Fri Jan 19 14:59:23 2018 -0600
+
+    Fixed placing rooms glitches.
+
+commit 0098a100bcea01d4c623624d9014d5143b3174c0
+Author: Tyler Jaacks <tylerjaacks@gmail.com>
+Date:   Fri Jan 19 13:31:38 2018 -0600
+
+    Added some bounds checking and overlap detection.
+
+commit 33a6ed7c1c6046759395442bd6ef8cf6c7a1a707
+Author: Tyler Jaacks <TylerJaacks@Gmail.com>
+Date:   Thu Jan 18 20:33:47 2018 -0600
+
+    Update README
+
+commit b0ce839fee33a042c0c821ce39a6acdcf892d6d0
+Author: Tyler Jaacks <TylerJaacks@Gmail.com>
+Date:   Thu Jan 18 20:33:04 2018 -0600
+
+    Delete Assignment0.log
+
+commit 8d1934f065b2dff4921542a2ce148224592d4aa0
+Author: Tyler Jaacks <tylerjaacks@gmail.com>
+Date:   Thu Jan 18 20:32:00 2018 -0600
+
+    Added creating dungeon.
+
+commit be02a176de15de8e8620df43d8191365da44946d
+Author: Tyler Jaacks <tylerjaacks@gmail.com>
+Date:   Thu Jan 18 19:55:22 2018 -0600
+
+    Got room placement working.
+
+commit 300024d71bb8a7621d9fd8b58ea4ac0db88d86c4
+Author: Tyler Jaacks <tylerjaacks@gmail.com>
+Date:   Wed Jan 17 13:57:16 2018 -0600
+
+    Added the next homework.
+
+commit 6b0a6cfd09d77178e96bcfa3582f13e86d88f1f3
+Author: Tyler Jaacks <TylerJaacks@Gmail.com>
+Date:   Tue Jan 16 19:20:53 2018 -0600
+
+    Update CHANGELOG
+
+commit c80721b452cba4c498cc927762ba15d90bfc2026
+Author: Tyler Jaacks <tylerjaacks@gmail.com>
+Date:   Tue Jan 16 19:19:18 2018 -0600
+
+    Finished the assignment.
+
+commit 2325768f9c0fd7eaf4b190aa8525d1174895b38b
+Author: Tyler Jaacks <tylerjaacks@gmail.com>
+Date:   Thu Jan 11 16:46:55 2018 -0600
+
+    Created spwan_queen and convert_row and get_string.
+
+commit 882cfc2febaa1dc4dd482725c28451604b9ff84a
+Author: Tyler Jaacks <tylerjaacks@gmail.com>
+Date:   Wed Jan 10 20:23:58 2018 -0600
+
+    Added a test to test the checks.
+
+commit c46bef7fb9b22176cb023778885d5c8483d3e9be
+Author: Tyler Jaacks <tylerjaacks@gmail.com>
+Date:   Wed Jan 10 20:20:56 2018 -0600
+
+    Added diagonal checks.
+
+commit 91cc612d8b90ed8f8184d1fa8c785cd4fb42375b
+Author: Tyler Jaacks <tylerjaacks@gmail.com>
+Date:   Tue Jan 9 18:00:46 2018 -0600
+
+    Added checks for rows and columns.
+
+commit 1219917298d6572fa0a34d441ed5a0a9325aca68
+Author: Tyler Jaacks <tylerjaacks@gmail.com>
+Date:   Tue Jan 9 17:07:01 2018 -0600
+
+    Fixed somethings.
+
+commit 03fcb1cda536852223e243bff96df9a6b4b77b3b
+Author: Tyler Jaacks <tylerjaacks@gmail.com>
+Date:   Tue Jan 9 12:13:31 2018 -0600
+
+    Added Visual Studio solution and Homework1 project.
+
+commit 5705beb43e71d5efae9ef8e04636346a1973ec83
+Author: Tyler Jaacks <TylerJaacks@Gmail.com>
+Date:   Tue Jan 9 12:08:05 2018 -0600
+
+    Initial commit
