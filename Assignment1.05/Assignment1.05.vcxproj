@@ -106,10 +106,6 @@
     <ClCompile Include="path.c" />
     <ClCompile Include="pc.c" />
     <ClCompile Include="rlg327.c" />
-    <ClCompile Include="ui.c">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="utils.c" />
   </ItemGroup>
   <ItemGroup>
@@ -123,7 +119,6 @@
     <ClInclude Include="npc.h" />
     <ClInclude Include="path.h" />
     <ClInclude Include="pc.h" />
-    <ClInclude Include="ui.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <ItemGroup>

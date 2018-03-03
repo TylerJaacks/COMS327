@@ -6,6 +6,8 @@
 #include <limits.h>
 #include <errno.h>
 
+#include <ncurses.h>
+
 #include "dungeon.h"
 #include "utils.h"
 #include "heap.h"
@@ -682,13 +684,15 @@ void render_dungeon(dungeon_t *d)
 
 	pair_t p;
 
-	putchar('\n');
+	printw("\n");
+
 	for (p[dim_y] = 0; p[dim_y] < DUNGEON_Y; p[dim_y]++)
 	{
 		for (p[dim_x] = 0; p[dim_x] < DUNGEON_X; p[dim_x]++)
 		{
 			if (charpair(p))
 			{
+				// TODO Fix this shit!
 				putchar(charpair(p)->symbol);
 			}
 			else
@@ -697,25 +701,27 @@ void render_dungeon(dungeon_t *d)
 				{
 				case ter_wall:
 				case ter_wall_immutable:
-					putchar(' ');
+					printw(" ");
 					break;
 				case ter_floor:
 				case ter_floor_room:
-					putchar('.');
+					printw(".");
 					break;
 				case ter_floor_hall:
-					putchar('#');
+					printw("#");
 					break;
 				case ter_debug:
-					putchar('*');
+					printw("*");
 					fprintf(stderr, "Debug character at %d, %d\n", p[dim_y], p[dim_x]);
 					break;
 				}
 			}
 		}
-		putchar('\n');
+
+		printw("\n");
 	}
-	putchar('\n');
+
+	printw("\n");
 }
 
 void delete_dungeon(dungeon_t *d)
@@ -1136,7 +1142,7 @@ void render_distance_map(dungeon_t *d)
 			if (p[dim_x] == d->pc.position[dim_x] &&
 				p[dim_y] == d->pc.position[dim_y])
 			{
-				putchar('@');
+				printw("@");
 			}
 			else
 			{
@@ -1144,7 +1150,7 @@ void render_distance_map(dungeon_t *d)
 				{
 				case ter_wall:
 				case ter_wall_immutable:
-					putchar(' ');
+					printw(" ");
 					break;
 				case ter_floor:
 				case ter_floor_room:
@@ -1152,21 +1158,22 @@ void render_distance_map(dungeon_t *d)
 					if (d->pc_distance[p[dim_y]][p[dim_x]] == 255)
 					{
 						/* Display an asteric for distance infinity */
-						putchar('*');
+						printw("*");
 					}
 					else
 					{
+						// TODO Fix this shit!
 						putchar('0' + d->pc_distance[p[dim_y]][p[dim_x]] % 10);
 					}
 					break;
 				case ter_debug:
 					fprintf(stderr, "Debug character at %d, %d\n", p[dim_y], p[dim_x]);
-					putchar('*');
+					printw("*");
 					break;
 				}
 			}
 		}
-		putchar('\n');
+		printw("\n");
 	}
 }
 
@@ -1181,14 +1188,14 @@ void render_tunnel_distance_map(dungeon_t *d)
 			if (p[dim_x] == d->pc.position[dim_x] &&
 				p[dim_y] == d->pc.position[dim_y])
 			{
-				putchar('@');
+				printw("@");
 			}
 			else
 			{
 				switch (mappair(p))
 				{
 				case ter_wall_immutable:
-					putchar(' ');
+					printw(" ");
 					break;
 				case ter_wall:
 				case ter_floor:
@@ -1197,20 +1204,21 @@ void render_tunnel_distance_map(dungeon_t *d)
 					if (d->pc_tunnel[p[dim_y]][p[dim_x]] == 255)
 					{
 						/* Display an asteric for distance infinity */
-						putchar('*');
+						printw("*");
 					}
 					else
 					{
+						// TODO Fix this shit!
 						putchar('0' + d->pc_tunnel[p[dim_y]][p[dim_x]] % 10);
 					}
 					break;
 				case ter_debug:
 					fprintf(stderr, "Debug character at %d, %d\n", p[dim_y], p[dim_x]);
-					putchar('*');
+					printw("*");
 					break;
 				}
 			}
 		}
-		putchar('\n');
+		printw("\n");
 	}
 }

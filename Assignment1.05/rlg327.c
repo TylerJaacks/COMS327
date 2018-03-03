@@ -3,13 +3,14 @@
 #include <sys/time.h>
 #include <unistd.h>
 
+#include <ncurses.h>
+
 /* Very slow seed: 686846853 */
 
 #include "dungeon.h"
 #include "pc.h"
 #include "npc.h"
 #include "move.h"
-#include "ui.h"
 
 const char *victory =
 "\n                                       o\n"
@@ -76,6 +77,8 @@ void usage(char *name)
 
 int main(int argc, char *argv[])
 {
+	initscr();
+
 	dungeon_t d;
 	time_t seed;
 	struct timeval tv;
@@ -310,6 +313,8 @@ int main(int argc, char *argv[])
 	pc_delete(d.pc.pc);
 
 	delete_dungeon(&d);
+
+    endwin();
 
 	return 0;
 }
