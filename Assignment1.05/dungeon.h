@@ -6,6 +6,8 @@
 # include "dims.h"
 # include "character.h"
 
+#include <ncurses.h>
+
 #define DUNGEON_X              80
 #define DUNGEON_Y              21
 #define MIN_ROOMS              5

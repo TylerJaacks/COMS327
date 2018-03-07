@@ -1,0 +1,9 @@
+Has all the same functionality of the past assignements such as loading and saving dungeons. 
+But also includes the ability to move the player using the number Keypad Up, Down, Left, and Right respectively. 
+You can also access the monster list by using F1 and close it with the same key.
+
+-----------------------BUGS----------------------------
+1.) The player can tunnel.
+2.) The player can go out of bounds, and cause a crash.
+3.) The monster list doesn't seem to show all the monsters.
+4.) The monster list doesn't have scrolling.
