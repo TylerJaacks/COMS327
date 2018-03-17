@@ -4,25 +4,31 @@
     <RemoteDebuggingMode>gdb</RemoteDebuggingMode>
     <DebuggerFlavor>LinuxDebugger</DebuggerFlavor>
     <RemoteDebuggerWorkingDirectory>/home/tjaacks/COMS327/Assignment0/</RemoteDebuggerWorkingDirectory>
+    <RemoteTarget>-1537143545;pyrite.cs.iastate.edu (username=, port=22, authentication=Password)</RemoteTarget>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <RemoteDebuggerWorkingDirectory>/home/tjaacks/COMS327/Assignment0/</RemoteDebuggerWorkingDirectory>
     <DebuggerFlavor>LinuxDebugger</DebuggerFlavor>
+    <RemoteTarget>-1537143545;pyrite.cs.iastate.edu (username=, port=22, authentication=Password)</RemoteTarget>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <RemoteDebuggerWorkingDirectory>/home/tjaacks/COMS327/Assignment0/</RemoteDebuggerWorkingDirectory>
     <DebuggerFlavor>LinuxDebugger</DebuggerFlavor>
+    <RemoteTarget>-1537143545;pyrite.cs.iastate.edu (username=, port=22, authentication=Password)</RemoteTarget>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <RemoteDebuggerWorkingDirectory>/home/tjaacks/COMS327/Assignment0/</RemoteDebuggerWorkingDirectory>
     <DebuggerFlavor>LinuxDebugger</DebuggerFlavor>
+    <RemoteTarget>-1537143545;pyrite.cs.iastate.edu (username=, port=22, authentication=Password)</RemoteTarget>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <RemoteDebuggerWorkingDirectory>/home/tjaacks/COMS327/Assignment0/</RemoteDebuggerWorkingDirectory>
     <DebuggerFlavor>LinuxDebugger</DebuggerFlavor>
+    <RemoteTarget>-1537143545;pyrite.cs.iastate.edu (username=, port=22, authentication=Password)</RemoteTarget>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <RemoteDebuggerWorkingDirectory>/home/tjaacks/COMS327/Assignment0/</RemoteDebuggerWorkingDirectory>
     <DebuggerFlavor>LinuxDebugger</DebuggerFlavor>
+    <RemoteTarget>-1537143545;pyrite.cs.iastate.edu (username=, port=22, authentication=Password)</RemoteTarget>
   </PropertyGroup>
 </Project>
