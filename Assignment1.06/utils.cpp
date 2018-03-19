@@ -1,8 +1,9 @@
-#include <string.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#include <errno.h>
-#include <stdio.h>
+
+#include <cstring>
+#include <cerrno>
+#include <cstdio>
 
 #include "utils.h"
 
@@ -10,7 +11,7 @@ int makedirectory(char *dir)
 {
   char *slash;
 
-  for (slash = dir + strlen(dir); slash > dir && *slash != '/'; slash--)
+  for (slash = dir + std::strlen(dir); slash > dir && *slash != '/'; slash--)
     ;
 
   if (slash == dir) {
@@ -22,16 +23,20 @@ int makedirectory(char *dir)
       fprintf(stderr, "mkdir(%s): %s\n", dir, strerror(errno));
       return 1;
     }
+    
     if (*slash != '/') {
       return 1;
     }
+
     *slash = '\0';
+
     if (makedirectory(dir)) {
       *slash = '/';
       return 1;
     }
 
     *slash = '/';
+
     if (mkdir(dir, 0700) && errno != EEXIST) {
       fprintf(stderr, "mkdir(%s): %s\n", dir, strerror(errno));
       return 1;

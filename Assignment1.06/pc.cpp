@@ -1,6 +1,6 @@
-#include <stdlib.h>
+#include <cstdlib> 
 
-#include "string.h"
+#include <cstring> 
 
 #include "dungeon.h"
 #include "pc.h"
@@ -40,7 +40,7 @@ void config_pc(dungeon_t *d)
   d->pc.speed = PC_SPEED;
   d->pc.alive = 1;
   d->pc.sequence_number = 0;
-  d->pc.pc = calloc(1, sizeof (*d->pc.pc));
+  d->pc.pc = (pc_t *) calloc(1, sizeof (*d->pc.pc));
   d->pc.npc = NULL;
   d->pc.kills[kill_direct] = d->pc.kills[kill_avenged] = 0;
 

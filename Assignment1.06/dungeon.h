@@ -1,10 +1,10 @@
 #ifndef DUNGEON_H
 # define DUNGEON_H
 
-# include "heap.h"
-# include "macros.h"
-# include "dims.h"
-# include "character.h"
+#include "heap.h"
+#include "macros.h"
+#include "dims.h"
+#include "character.h"
 
 #define DUNGEON_X              80
 #define DUNGEON_Y              21

@@ -95,12 +95,12 @@ static void dijkstra_corridor(dungeon_t *d, pair_t from, pair_t to)
     }
   }
 
-  while ((p = (corridor_path_t *) heap_remove_min(&h))) {
+  while ((p = (corridor_path_t*) heap_remove_min(&h))) {
     p->hn = NULL;
 
     if ((p->pos[dim_y] == to[dim_y]) && p->pos[dim_x] == to[dim_x]) {
       for (x = to[dim_x], y = to[dim_y];
-           (x != from[dim_x]) || (y != from[dim_y]);
+           (x != (uint32_t) from[dim_x]) || (y != (uint32_t) from[dim_y]);
            p = &path[y][x], x = p->from[dim_x], y = p->from[dim_y]) {
         if (mapxy(x, y) != ter_floor_room) {
           mapxy(x, y) = ter_floor_hall;
@@ -199,7 +199,7 @@ static void dijkstra_corridor_inv(dungeon_t *d, pair_t from, pair_t to)
 
     if ((p->pos[dim_y] == to[dim_y]) && p->pos[dim_x] == to[dim_x]) {
       for (x = to[dim_x], y = to[dim_y];
-           (x != from[dim_x]) || (y != from[dim_y]);
+           (x != (uint32_t) from[dim_x]) || (y != (uint32_t) from[dim_y]);
            p = &path[y][x], x = p->from[dim_x], y = p->from[dim_y]) {
         if (mapxy(x, y) != ter_floor_room) {
           mapxy(x, y) = ter_floor_hall;
@@ -284,7 +284,7 @@ static int create_cycle(dungeon_t *d)
   /* Find the (approximately) farthest two rooms, then connect *
    * them by the shortest path using inverted hardnesses.      */
 
-  int32_t max, tmp, i, j, p, q;
+  uint32_t max, tmp, i, j, p, q;
   pair_t e1, e2;
 
   for (i = max = 0; i < d->num_rooms - 1; i++) {
@@ -408,7 +408,7 @@ static int smooth_hardness(dungeon_t *d)
     }
     if (x - 1 >= 0 && y + 1 < DUNGEON_Y && !hardness[y + 1][x - 1]) {
       hardness[y + 1][x - 1] = i;
-      tail->next = (queue_node_t *) malloc(sizeof (*tail));
+      tail->next = (queue_node_t *)malloc(sizeof (*tail));
       tail = tail->next;
       tail->next = NULL;
       tail->x = x - 1;
@@ -679,7 +679,7 @@ uint32_t calculate_dungeon_size(dungeon_t *d)
 
 int write_dungeon(dungeon_t *d, char *file)
 {
-  char *home;
+  const char *home;
   char *filename;
   FILE *f;
   size_t len;
@@ -800,10 +800,10 @@ int read_rooms(dungeon_t *d, FILE *f)
 
     /* After reading each room, we need to reconstruct them in the dungeon. */
     for (y = d->rooms[i].position[dim_y];
-         y < d->rooms[i].position[dim_y] + d->rooms[i].size[dim_y];
+         y < (uint32_t) d->rooms[i].position[dim_y] + d->rooms[i].size[dim_y];
          y++) {
       for (x = d->rooms[i].position[dim_x];
-           x < d->rooms[i].position[dim_x] + d->rooms[i].size[dim_x];
+           x < (uint32_t) d->rooms[i].position[dim_x] + d->rooms[i].size[dim_x];
            x++) {
         mapxy(x, y) = ter_floor_room;
       }
@@ -826,7 +826,7 @@ int read_dungeon(dungeon_t *d, char *file)
   char semantic[sizeof (DUNGEON_SAVE_SEMANTIC)];
   uint32_t be32;
   FILE *f;
-  char *home;
+  const char *home;
   size_t len;
   char *filename;
   struct stat buf;

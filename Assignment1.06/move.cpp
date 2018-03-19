@@ -22,7 +22,7 @@ void do_combat(dungeon_t *d, character_t *atk, character_t *def)
     int can_see_atk; 
     int can_see_def;
     
-    std::string organs[] = {
+    const char *organs[] = {
         "liver",                   /*  0 */
         "pancreas",                /*  1 */
         "heart",                   /*  2 */
@@ -150,7 +150,7 @@ void do_moves(dungeon_t *d)
   }
 
   while (pc_is_alive(d) &&
-         (e = heap_remove_min(&d->events)) &&   //TODO Fix this line.
+         (e = (event_t*) heap_remove_min(&d->events)) &&
          ((e->type != event_character_turn) || (e->c != &d->pc))) {
     d->time = e->time;
     if (e->type == event_character_turn) {
