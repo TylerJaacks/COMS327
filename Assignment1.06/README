@@ -1,1 +1,1 @@
-Does all of the stuff from the previous assignment, but no includes fog of war and has been converted to C++. This build has some problems first the fog of war is very janky and still shows monsters. Second, the project still has structs and not classes.
+Does all of the stuff from the previous assignment, but no includes fog of war and has been converted to C++. This build has some problems first the fog of war is very janky and still shows monsters. Second, the project still has structs and not classes. Period toggles fog of war.

@@ -13,6 +13,8 @@
 /* Same ugly hack we did in path.c */
 static dungeon_t *dungeon;
 
+int is_revealed = 0;
+
 typedef struct io_message {
   /* Will print " --more-- " at end of line when another message follows. *
    * Leave 10 extra spaces for that.                                      */
@@ -462,1399 +464,108 @@ void io_handle_input(dungeon_t *d)
   do {
     switch (key = getch()) {
     case '7':
+      break;
     case 'y':
+      break;
     case KEY_HOME:
       fail_code = move_pc(d, 7);
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y]) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 0, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y]) = 1;
-
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 0) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 1) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 2) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 0) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 1) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 2) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
+      reveal_map(d);
       break;
     case '8':
+      break;
     case 'k':
+      break;
     case KEY_UP:
       fail_code = move_pc(d, 8);
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y]) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 0, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y]) = 1;
-
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 0) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 1) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 2) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 0) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 1) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 2) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
+      reveal_map(d);
       break;
     case '9':
+      break;
     case 'u':
+      break;
     case KEY_PPAGE:
       fail_code = move_pc(d, 9);
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y]) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 0, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y]) = 1;
-
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 0) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 1) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 2) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 0) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 1) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 2) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
+      reveal_map(d);
       break;
     case '6':
+      break;
     case 'l':
+      break;
     case KEY_RIGHT:
       fail_code = move_pc(d, 6);
-      
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y]) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 0, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y]) = 1;
-
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 0) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 1) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 2) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 0) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 1) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 2) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
+      reveal_map(d);
       break;
     case '3':
+      break;
     case 'n':
+      break;
     case KEY_NPAGE:
       fail_code = move_pc(d, 3);
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y]) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 0, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y]) = 1;
-
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 0) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 1) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 2) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 0) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 1) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 2) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
+      reveal_map(d);
       break;
     case '2':
+      break;
     case 'j':
+      break;
     case KEY_DOWN:
       fail_code = move_pc(d, 2);
-
-            visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y]) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 0, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y]) = 1;
-
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 0) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 1) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 2) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 0) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 1) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 2) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
+      reveal_map(d);
       break;
     case '1':
+      break;
     case 'b':
+      break;
     case KEY_END:
       fail_code = move_pc(d, 1);
-
-            visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y]) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 0, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y]) = 1;
-
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 0) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 1) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 2) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 0) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 1) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 2) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
+      reveal_map(d);
       break;
     case '4':
+      break;
     case 'h':
+      break;
     case KEY_LEFT:
       fail_code = move_pc(d, 4);
-
-            visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y]) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 0, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y]) = 1;
-
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 0) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 1) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 2) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 0) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 1) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 2) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
+      reveal_map(d);
       break;
     case '5':
+      break;
     case ' ':
+      break;
     case '.':
+      reveal_entire_map(d);
+      break;
     case KEY_B2:
       fail_code = 0;
       break;
     case '>':
       fail_code = move_pc(d, '>');
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y]) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 0, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y]) = 1;
-
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 0) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 1) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 2) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 0) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 1) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 2) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
+      reveal_map(d);
       break;
     case '<':
       fail_code = move_pc(d, '<');
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y]) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 0, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y]) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y]) = 1;
-
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 0) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 1) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 2) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
-
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 0) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 1) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 2) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 3) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
-      visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
-      visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
-      visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
-      visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
-
+      reveal_map(d);
       break;
     case 'Q':
       d->quit = 1;
       fail_code = 0;
       break;
     case 'T':
-      /* New command.  Display the distances for tunnelers.             */
+      /* New command.  Display the distances for tunnelers. */
       io_display_tunnel(d);
       fail_code = 1;
       break;
     case 'D':
-      /* New command.  Display the distances for non-tunnelers.         */
+      /* New command.  Display the distances for non-tunnelers. */
       io_display_distance(d);
       fail_code = 1;
       break;
     case 'H':
-      /* New command.  Display the hardnesses.                          */
+      /* New command.  Display the hardnesses. */
       io_display_hardness(d);
       fail_code = 1;
       break;
     case 's':
-      /* New command.  Return to normal display after displaying some   *
-       * special screen.                                                */
+      /* New command. Return to normal display after displaying some special screen. */
       io_display(d);
       fail_code = 1;
       break;
@@ -1862,8 +573,9 @@ void io_handle_input(dungeon_t *d)
       fail_code = 1;
       break;
     case 'g':
-      /* Teleport the PC to a random place in the dungeon.              */
+      /* Teleport the PC to a random place in the dungeon. */
       io_teleport_pc(d);
+      reveal_map(d);
       fail_code = 0;
       break;
     case 'm':
@@ -1875,7 +587,7 @@ void io_handle_input(dungeon_t *d)
        * printf()-style debugging (though gdb is probably a better   *
        * option.  Not that it matterrs, but using this command will  *
        * waste a turn.  Set fail_code to 1 and you should be able to *
-       * figure out why I did it that way.                           */
+       * figure out why I did it that way. */
       io_queue_message("This is the first message.");
       io_queue_message("Since there are multiple messages, "
                        "you will see \"more\" prompts.");
@@ -1900,9 +612,186 @@ void io_handle_input(dungeon_t *d)
        * octal, with the leading zero, because ncurses.h lists codes in *
        * octal, thus allowing us to do reverse lookups.  If a key has a *
        * name defined in the header, you can use the name here, else    *
-       * you can directly use the octal value.                          */
+       * you can directly use the octal value. */
       mvprintw(0, 0, "Unbound key: %#o ", key);
       fail_code = 1;
     }
   } while (fail_code);
+}
+
+void reveal_map(dungeon_t *d)
+{
+    visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y]) = 1;
+    visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y]) = 1;
+    visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y]) = 1;
+    visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y]) = 1;
+
+    visitedxy(d->pc.position[dim_x] - 0, d->pc.position[dim_y]) = 1;
+    visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y]) = 1;
+    visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y]) = 1;
+    visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y]) = 1;
+
+    visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 0) = 1;
+    visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 1) = 1;
+    visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 2) = 1;
+    visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] + 3) = 1;
+
+    visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 0) = 1;
+    visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 1) = 1;
+    visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 2) = 1;
+    visitedxy(d->pc.position[dim_x], d->pc.position[dim_y] - 3) = 1;
+
+    visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
+    visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
+    visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
+    visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
+
+    visitedxy(d->pc.position[dim_x] - 0, d->pc.position[dim_y] - 0) = 1;
+    visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] - 1) = 1;
+    visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] - 2) = 1;
+    visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] - 3) = 1;
+
+    visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
+    visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
+    visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
+    visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
+
+    visitedxy(d->pc.position[dim_x] - 0, d->pc.position[dim_y] + 0) = 1;
+    visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 1) = 1;
+    visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 2) = 1;
+    visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 3) = 1;
+
+    visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 0) = 1;
+    visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 1) = 1;
+    visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 2) = 1;
+    visitedxy(d->pc.position[dim_x] - 1, d->pc.position[dim_y] + 3) = 1;
+
+    visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 0) = 1;
+    visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
+    visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 2) = 1;
+    visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 3) = 1;
+
+    visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 0) = 1;
+    visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 1) = 1;
+    visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 2) = 1;
+    visitedxy(d->pc.position[dim_x] - 2, d->pc.position[dim_y] + 3) = 1;
+
+    visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 0) = 1;
+    visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 1) = 1;
+    visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
+    visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 3) = 1;
+
+    visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 0) = 1;
+    visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 1) = 1;
+    visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 2) = 1;
+    visitedxy(d->pc.position[dim_x] - 3, d->pc.position[dim_y] + 3) = 1;
+
+    visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 0) = 1;
+    visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 1) = 1;
+    visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 2) = 1;
+    visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
+
+    visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
+    visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 0) = 1;
+    visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 0) = 1;
+    visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 0) = 1;
+
+    visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 1) = 1;
+    visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
+    visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 1) = 1;
+    visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 1) = 1;
+
+    visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 2) = 1;
+    visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 2) = 1;
+    visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
+    visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 2) = 1;
+
+    visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 3) = 1;
+    visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 3) = 1;
+    visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 3) = 1;
+    visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
+
+    visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
+    visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
+    visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
+    visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
+
+    visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
+    visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 1) = 1;
+    visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 2) = 1;
+    visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
+
+
+    visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
+    visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 0) = 1;
+    visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 0) = 1;
+    visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 0) = 1;
+
+    visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 1) = 1;
+    visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
+    visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 1) = 1;
+    visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 1) = 1;
+
+    visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 2) = 1;
+    visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 2) = 1;
+    visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
+    visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 2) = 1;
+
+    visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 3) = 1;
+    visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 3) = 1;
+    visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 3) = 1;
+    visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
+
+    visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
+    visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
+    visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
+    visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
+
+    visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] - 0) = 1;
+    visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] - 1) = 1;
+    visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] - 2) = 1;
+    visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] - 3) = 1;
+
+    visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 1) = 1;
+    visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 1) = 1;
+
+    visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 2) = 1;
+    visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 3) = 1;
+
+    visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 3) = 1;
+    visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 2) = 1;
+
+    visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 1) = 1;
+    visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 1) = 1;
+
+    io_display(d);
+}
+
+void reveal_entire_map(dungeon_t *d)
+{
+  if (is_revealed == 0)
+  {
+    for (int y = 0; y < DUNGEON_Y; y++) {
+      for (int x = 0; x < DUNGEON_X; x++) {
+        visitedxy(x, y) = 1;
+      }
+    }
+
+    is_revealed = 1;
+
+    io_display(d);
+  }
+
+  else
+  {
+    for (int y = 0; y < DUNGEON_Y; y++) {
+      for (int x = 0; x < DUNGEON_X; x++) {
+        visitedxy(x, y) = 0;
+      }
+    }
+
+    is_revealed = 0;
+
+    io_display(d);
+  }
 }
