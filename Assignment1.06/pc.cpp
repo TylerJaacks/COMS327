@@ -107,11 +107,6 @@ void config_pc(dungeon_t *d)
   visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 2) = 1;
   visitedxy(d->pc.position[dim_x] + 3, d->pc.position[dim_y] + 3) = 1;
 
-
-
-
-
-
   visitedxy(d->pc.position[dim_x] + 0, d->pc.position[dim_y] + 0) = 1;
   visitedxy(d->pc.position[dim_x] + 1, d->pc.position[dim_y] + 0) = 1;
   visitedxy(d->pc.position[dim_x] + 2, d->pc.position[dim_y] + 0) = 1;
