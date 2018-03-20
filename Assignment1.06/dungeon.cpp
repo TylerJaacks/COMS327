@@ -514,6 +514,8 @@ static int empty_dungeon(dungeon_t *d)
   for (y = 0; y < DUNGEON_Y; y++) {
     for (x = 0; x < DUNGEON_X; x++) {
       mapxy(x, y) = ter_wall;
+      visitedxy(x, y) = 0;
+
       if (y == 0 || y == DUNGEON_Y - 1 ||
           x == 0 || x == DUNGEON_X - 1) {
         mapxy(x, y) = ter_wall_immutable;
