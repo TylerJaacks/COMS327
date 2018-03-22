@@ -27,46 +27,45 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{b22801ef-205f-4d4b-bdb3-777cf2ee3b59}</ProjectGuid>
+    <ProjectGuid>{561a3a3e-a1a7-4e3a-8f66-222f0c6083f4}</ProjectGuid>
     <Keyword>Linux</Keyword>
-    <RootNamespace>Assignment1_06</RootNamespace>
+    <RootNamespace>Assignment1_07</RootNamespace>
     <MinimumVisualStudioVersion>15.0</MinimumVisualStudioVersion>
     <ApplicationType>Linux</ApplicationType>
     <ApplicationTypeRevision>1.0</ApplicationTypeRevision>
     <TargetLinuxPlatform>Generic</TargetLinuxPlatform>
     <LinuxProjectType>{FC1A4D80-50E9-41DA-9192-61C0DBAA00D2}</LinuxProjectType>
-    <ProjectName>Assignment1.06</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
     <ConfigurationType>Makefile</ConfigurationType>
-    <RemoteRootDir>/home/tjaacks/COMS327/Assignment1.06/</RemoteRootDir>
+    <RemoteRootDir>/home/tjaacks/COMS327/</RemoteRootDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
     <ConfigurationType>Makefile</ConfigurationType>
-    <RemoteRootDir>/home/tjaacks/COMS327/Assignment1.06/</RemoteRootDir>
+    <RemoteRootDir>/home/tjaacks/COMS327/</RemoteRootDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
     <ConfigurationType>Makefile</ConfigurationType>
-    <RemoteRootDir>/home/tjaacks/COMS327/Assignment1.06/</RemoteRootDir>
+    <RemoteRootDir>/home/tjaacks/COMS327/</RemoteRootDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
     <ConfigurationType>Makefile</ConfigurationType>
-    <RemoteRootDir>/home/tjaacks/COMS327/Assignment1.06/</RemoteRootDir>
+    <RemoteRootDir>/home/tjaacks/COMS327/</RemoteRootDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <UseDebugLibraries>true</UseDebugLibraries>
     <ConfigurationType>Makefile</ConfigurationType>
-    <RemoteRootDir>/home/tjaacks/COMS327/Assignment1.06/</RemoteRootDir>
+    <RemoteRootDir>/home/tjaacks/COMS327/</RemoteRootDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <UseDebugLibraries>false</UseDebugLibraries>
     <ConfigurationType>Makefile</ConfigurationType>
-    <RemoteRootDir>/home/tjaacks/COMS327/Assignment1.06/</RemoteRootDir>
+    <RemoteRootDir>/home/tjaacks/COMS327/</RemoteRootDir>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings" />
@@ -75,40 +74,40 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM'">
     <RemoteBuildCommandLine>make rlg327</RemoteBuildCommandLine>
-    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.06/rlg327</RemoteBuildOutputs>
+    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.07/rlg327</RemoteBuildOutputs>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM'">
     <RemoteBuildCommandLine>make rlg327</RemoteBuildCommandLine>
-    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.06/rlg327</RemoteBuildOutputs>
+    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.07/rlg327</RemoteBuildOutputs>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <RemoteBuildCommandLine>make rlg327</RemoteBuildCommandLine>
-    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.06/rlg327</RemoteBuildOutputs>
+    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.07/rlg327</RemoteBuildOutputs>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <RemoteBuildCommandLine>make rlg327</RemoteBuildCommandLine>
-    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.06/rlg327</RemoteBuildOutputs>
+    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.07/rlg327</RemoteBuildOutputs>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x86'">
     <RemoteBuildCommandLine>make rlg327</RemoteBuildCommandLine>
-    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.06/rlg327</RemoteBuildOutputs>
+    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.07/rlg327</RemoteBuildOutputs>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
     <RemoteBuildCommandLine>make rlg327</RemoteBuildCommandLine>
-    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.06/rlg327</RemoteBuildOutputs>
+    <RemoteBuildOutputs>/home/tjaacks/COMS327/Assignment1.07/rlg327</RemoteBuildOutputs>
   </PropertyGroup>
   <ItemGroup>
-    <ClCompile Include="character.c" />
-    <ClCompile Include="dungeon.c" />
-    <ClCompile Include="event.c" />
+    <ClCompile Include="character.cpp" />
+    <ClCompile Include="dungeon.cpp" />
+    <ClCompile Include="event.cpp" />
     <ClCompile Include="heap.c" />
-    <ClCompile Include="io.c" />
-    <ClCompile Include="move.c" />
-    <ClCompile Include="npc.c" />
-    <ClCompile Include="path.c" />
-    <ClCompile Include="pc.c" />
-    <ClCompile Include="rlg327.c" />
-    <ClCompile Include="utils.c" />
+    <ClCompile Include="io.cpp" />
+    <ClCompile Include="move.cpp" />
+    <ClCompile Include="npc.cpp" />
+    <ClCompile Include="path.cpp" />
+    <ClCompile Include="pc.cpp" />
+    <ClCompile Include="rlg327.cpp" />
+    <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="character.h" />

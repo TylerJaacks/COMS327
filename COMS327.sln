@@ -15,7 +15,9 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Assignment1.04", "Assignmen
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Assignment1.05", "Assignment1.05\Assignment1.05.vcxproj", "{AA5B473D-F0D8-49EF-A613-B854059C18B9}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Assingment1.06", "Assingment1.06\Assingment1.06.vcxproj", "{B22801EF-205F-4D4B-BDB3-777CF2EE3B59}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Assignment1.06", "Assignment1.06\Assingment1.06.vcxproj", "{B22801EF-205F-4D4B-BDB3-777CF2EE3B59}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Assignment1.07", "Assignment1.07\Assignment1.07.vcxproj", "{561A3A3E-A1A7-4E3A-8F66-222F0C6083F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -111,6 +113,18 @@ Global
 		{B22801EF-205F-4D4B-BDB3-777CF2EE3B59}.Release|x64.Build.0 = Release|x64
 		{B22801EF-205F-4D4B-BDB3-777CF2EE3B59}.Release|x86.ActiveCfg = Release|x86
 		{B22801EF-205F-4D4B-BDB3-777CF2EE3B59}.Release|x86.Build.0 = Release|x86
+		{561A3A3E-A1A7-4E3A-8F66-222F0C6083F4}.Debug|ARM.ActiveCfg = Debug|ARM
+		{561A3A3E-A1A7-4E3A-8F66-222F0C6083F4}.Debug|ARM.Build.0 = Debug|ARM
+		{561A3A3E-A1A7-4E3A-8F66-222F0C6083F4}.Debug|x64.ActiveCfg = Debug|x64
+		{561A3A3E-A1A7-4E3A-8F66-222F0C6083F4}.Debug|x64.Build.0 = Debug|x64
+		{561A3A3E-A1A7-4E3A-8F66-222F0C6083F4}.Debug|x86.ActiveCfg = Debug|x86
+		{561A3A3E-A1A7-4E3A-8F66-222F0C6083F4}.Debug|x86.Build.0 = Debug|x86
+		{561A3A3E-A1A7-4E3A-8F66-222F0C6083F4}.Release|ARM.ActiveCfg = Release|ARM
+		{561A3A3E-A1A7-4E3A-8F66-222F0C6083F4}.Release|ARM.Build.0 = Release|ARM
+		{561A3A3E-A1A7-4E3A-8F66-222F0C6083F4}.Release|x64.ActiveCfg = Release|x64
+		{561A3A3E-A1A7-4E3A-8F66-222F0C6083F4}.Release|x64.Build.0 = Release|x64
+		{561A3A3E-A1A7-4E3A-8F66-222F0C6083F4}.Release|x86.ActiveCfg = Release|x86
+		{561A3A3E-A1A7-4E3A-8F66-222F0C6083F4}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
