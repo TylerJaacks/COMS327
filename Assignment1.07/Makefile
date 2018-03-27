@@ -9,9 +9,7 @@ LDFLAGS = -lncurses
 
 BIN = rlg327
 OBJS = rlg327.o heap.o dungeon.o path.o utils.o character.o event.o \
-       pc.o npc.o move.o io.o
-
-all: $(BIN) etags
+       pc.o npc.o move.o io.o monster_description.o
 
 $(BIN): $(OBJS)
 	@$(ECHO) Linking $@
@@ -36,7 +34,3 @@ clean:
 clobber: clean
 	@$(ECHO) Removing backup files
 	@$(RM) *~ \#* *pgm
-
-etags:
-	@$(ECHO) Updating TAGS
-	@etags *.[ch]

@@ -1,0 +1,2 @@
+This reads a "monster description" file from .rlg327 folder and prints them to the screen. It also plays the game after the monster description is printing and pressing enter.
+You also MUST make sure you terminal is the max size otherwise the printing gets messed up.

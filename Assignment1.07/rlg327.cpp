@@ -3,6 +3,8 @@
 #include <sys/time.h>
 #include <unistd.h>
 
+#include <ncurses.h>
+
 /* Very slow seed: 686846853 */
 
 #include "dungeon.h"
@@ -10,6 +12,10 @@
 #include "npc.h"
 #include "move.h"
 #include "io.h"
+#include "monster_description.h"
+
+WINDOW *create_newwin(int height, int width, int starty, int startx);
+void destroy_win(WINDOW *local_win);
 
 const char *victory =
   "\n                                       o\n"
@@ -68,7 +74,8 @@ void usage(char *name)
   fprintf(stderr,
           "Usage: %s [-r|--rand <seed>] [-l|--load [<file>]]\n"
           "          [-s|--save [<file>]] [-i|--image <pgm file>]\n"
-          "          [-p|--pc <y> <x>] [-n|--nummon <count>]\n",
+          "          [-p|--pc <y> <x>] [-n|--nummon <count>]\n"
+          "          [-m|--mondes]\n",
           name);
 
   exit(-1);
@@ -76,6 +83,8 @@ void usage(char *name)
 
 int main(int argc, char *argv[])
 {
+  read_file();
+
   dungeon_t d;
   time_t seed;
   struct timeval tv;
@@ -86,6 +95,8 @@ int main(int argc, char *argv[])
   char *save_file;
   char *load_file;
   char *pgm_file;
+
+  read_file();
 
   memset(&d, 0, sizeof (d));
 
@@ -279,4 +290,24 @@ int main(int argc, char *argv[])
   delete_dungeon(&d);
 
   return 0;
+}
+
+WINDOW *create_newwin(int height, int width, int starty, int startx)
+{	
+  WINDOW *local_win;
+
+	local_win = newwin(height, width, starty, startx);
+	box(local_win, 0 , 0); 
+
+	wrefresh(local_win);
+
+	return local_win;
+}
+
+void destroy_win(WINDOW *local_win)
+{
+	wborder(local_win, ' ', ' ', ' ',' ',' ',' ',' ',' ');
+
+	wrefresh(local_win);
+	delwin(local_win);
 }
