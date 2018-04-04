@@ -13,6 +13,29 @@
 /* Same ugly hack we did in path.c */
 static dungeon_t *dungeon;
 
+// typedef enum item_type {
+//   objtype_no_type,
+//   objtype_WEAPON,
+//   objtype_OFFHAND,
+//   objtype_RANGED,
+//   objtype_LIGHT,
+//   objtype_ARMOR,
+//   objtype_HELMET,
+//   objtype_CLOAK,
+//   objtype_GLOVES,
+//   objtype_BOOTS,
+//   objtype_AMULET,
+//   objtype_RING,
+//   objtype_SCROLL,
+//   objtype_BOOK,
+//   objtype_FLASK,
+//   objtype_GOLD,
+//   objtype_AMMUNITION,
+//   objtype_FOOD,
+//   objtype_WAND,
+//   objtype_CONTAINER
+// } item_type_t;
+
 typedef struct io_message {
   /* Will print " --more-- " at end of line when another message follows. *
    * Leave 10 extra spaces for that.                                      */
@@ -205,20 +228,85 @@ void io_display(dungeon_t *d)
   int32_t visible_monsters;
 
   clear();
+  
+  for (int y = 0; y < DUNGEON_Y; y++)
+  {
+      for (int x = 0; x < DUNGEON_X; x++)
+      {
+          if (d->object_map[y][x] != NULL)
+          {
+              switch (d->object_map[y][x]->type)
+              {
+                case 0:
+                  mvaddch(y + 1, x, '*');
+                  break;
+                case 1:
+                  mvaddch(y + 1, x, '|');
+                  break;
+                case 2:
+                  mvaddch(y + 1, x, ')');
+                  break;
+                case 3:
+                  mvaddch(y + 1, x, '}');
+                  break;
+                case 4:
+                  mvaddch(y + 1, x, '~');
+                  break;
+                case 5:
+                  mvaddch(y + 1, x, '[');
+                  break;
+                case 6:
+                  mvaddch(y + 1, x, ']');
+                  break;
+                case 7:
+                  mvaddch(y + 1, x, '(');
+                  break;
+                case 8:
+                  mvaddch(y + 1, x, '{');
+                  break;
+                case 9:
+                  mvaddch(y + 1, x, '\\');
+                  break;
+                case 10:
+                  mvaddch(y + 1, x, '"');
+                  break;
+                case 11:
+                  mvaddch(y + 1, x, '=');
+                  break;
+                case 12:
+                  mvaddch(y + 1, x, '`');
+                  break;
+                case 13:
+                  mvaddch(y + 1, x, '?');
+                  break;
+                case 14:
+                  mvaddch(y + 1, x, '!');
+                  break;
+                case 15:
+                  mvaddch(y + 1, x, '$');
+                  break;
+                case 16:
+                  mvaddch(y + 1, x, '/');
+                  break;
+                case 17:
+                  mvaddch(y + 1, x, ',');
+                  break;
+                case 18:
+                  mvaddch(y + 1, x, '-');
+                  break;
+                case 19:
+                  mvaddch(y + 1, x, '%');
+                  break;
+              }
+          }
+      }
+  }
+
   for (visible_monsters = -1, y = 0; y < 21; y++) {
     for (x = 0; x < 80; x++) {
       if ((illuminated = is_illuminated(d->PC, y, x))) {
         attron(A_BOLD);
       }
-
-  // init_pair(COLOR_RED, COLOR_RED, COLOR_BLACK);
-  // init_pair(COLOR_GREEN, COLOR_GREEN, COLOR_BLACK);
-  // init_pair(COLOR_YELLOW, COLOR_YELLOW, COLOR_BLACK);
-  // init_pair(COLOR_BLUE, COLOR_BLUE, COLOR_BLACK);
-  // init_pair(COLOR_MAGENTA, COLOR_MAGENTA, COLOR_BLACK);
-  // init_pair(COLOR_CYAN, COLOR_CYAN, COLOR_BLACK);
-  // init_pair(COLOR_WHITE, COLOR_WHITE, COLOR_BLACK);
-
       if (d->character_map[y][x] &&
           can_see(d, character_get_pos(d->PC), character_get_pos(d->character_map[y][x]), 1, 0)) {
             if (character_get_color(d->character_map[y][x]) == 0) {

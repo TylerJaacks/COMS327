@@ -14,6 +14,7 @@
 #include "monster.h"
 #include "object.h"
 #include "dice.h"
+#include "utils.h"
 
 const char *victory =
   "\n                                       o\n"
@@ -255,9 +256,11 @@ int main(int argc, char *argv[])
 
   for (oi = d.object_descriptions.begin(); oi != d.object_descriptions.end(); oi++) 
   {
+    int u = rand_range(1, 20 - 1);
+
     object *object_ptr = new object(oi->name, 
                               oi->description, 
-                              0,  //oi->type, // TODO FIX TYPE
+                              u,
                               oi->color, 
                               oi->hit, 
                               oi->damage, 
