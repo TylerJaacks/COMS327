@@ -3,13 +3,13 @@ CXX = g++
 ECHO = echo
 RM = rm -f
 
-CFLAGS = -ggdb -funroll-loops
-CXXFLAGS = -ggdb -funroll-loops                                   
+CFLAGS = -ggdb -funroll-loops -fpermissive
+CXXFLAGS = -ggdb -funroll-loops -fpermissive                               
 LDFLAGS = -lncurses
 
 BIN = rlg327
 OBJS = rlg327.o heap.o dungeon.o path.o utils.o character.o event.o \
-       pc.o npc.o move.o io.o descriptions.o dice.o object.o
+       pc.o npc.o move.o io.o descriptions.o dice.o object.o monster.o
 
 all: $(BIN)
 

@@ -1,0 +1,22 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run",
+            "type": "bash",
+            "command": "./rlg327"
+        },
+        {
+            "label": "Build",
+            "type": "bash",
+            "command": "make"
+        },
+        {
+            "label": "Clobber",
+            "type": "bash",
+            "command": "make clobber"
+        }
+    ]
+}

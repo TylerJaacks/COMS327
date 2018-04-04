@@ -1,9 +1,9 @@
 #ifndef CHARACTER_H
 # define CHARACTER_H
 
-# include <stdint.h>
+#include <stdint.h>
 
-# include "dims.h"
+#include "dims.h"
 
 typedef enum kill_type {
   kill_direct,
@@ -13,9 +13,18 @@ typedef enum kill_type {
 
 class character {
  public:
+  const char* name;
+  const char* description;
   char symbol;
-  pair_t position;
+  uint32_t color;
   int32_t speed;
+  uint32_t abilities;
+  int32_t hitpoints;
+  int32_t damage;
+  uint32_t rarity;
+
+  pair_t position;
+
   uint32_t alive;
   /* Characters use to have a next_turn for the move queue.  Now that it is *
    * an event queue, there's no need for that here.  Instead it's in the    *
@@ -51,5 +60,6 @@ uint32_t character_get_dkills(const character *c);
 uint32_t character_get_ikills(const character *c);
 uint32_t character_increment_dkills(character *c);
 uint32_t character_increment_ikills(character *c, uint32_t k);
+uint32_t character_get_color(character *c);
 
 #endif

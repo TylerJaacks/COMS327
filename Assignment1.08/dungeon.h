@@ -7,6 +7,9 @@
 # include "character.h"
 # include "descriptions.h"
 
+#include "monster.h"
+#include "object.h"
+
 #define DUNGEON_X              80
 #define DUNGEON_Y              21
 #define MIN_ROOMS              5
@@ -74,6 +77,8 @@ class dungeon {
   heap_t events;
   uint16_t num_monsters;
   uint16_t max_monsters;
+  uint16_t num_items;
+  uint16_t max_items;
   uint32_t character_sequence_number;
   /* Game time isn't strictly necessary.  It's implicit in the turn number *
    * of the most recent thing removed from the event queue; however,       *
@@ -85,6 +90,8 @@ class dungeon {
   uint32_t quit;
   std::vector<monster_description> monster_descriptions;
   std::vector<object_description> object_descriptions;
+  std::vector<monster*> monsters;
+  std::vector<object*> objects;
 };
 
 void init_dungeon(dungeon *d);

@@ -1,4 +1,4 @@
-l#include <stdio.h>
+#include <stdio.h>
 #include <string.h>
 #include <sys/time.h>
 #include <unistd.h>
@@ -11,8 +11,9 @@ l#include <stdio.h>
 #include "move.h"
 #include "io.h"
 
+#include "monster.h"
+#include "object.h"
 #include "dice.h"
-#include "monster.cpp"
 
 const char *victory =
   "\n                                       o\n"
@@ -90,28 +91,6 @@ int main(int argc, char *argv[])
   char *load_file;
   char *pgm_file;
 
-  parse_descriptions(&d);
-
-  std::vector<monster_description>::iterator mi;
-  std::vector<object_description>::iterator oi;
-
-  for (mi = d.monster_descriptions.begin(); mi != d.monster_descriptions.end(); mi++) 
-  {
-    std::string name = mi->name;
-    std::string description = mi->description;
-    char symbol = mi->symbol;
-    std::vector<uint32_t> &color = mi->color;
-    dice &speed = mi->speed;
-    uint32_t abilities = mi->abilities;
-    dice &hitpoints = mi->hitpoints;
-    dice &damage = mi->damage;
-    uint32_t rarity = mi->rarity;
-
-    monster *m = new monster();
-  }
-
-  return 0;
-  
   memset(&d, 0, sizeof(d));
 
   /* Default behavior: Seed with the time, generate a new dungeon, *
@@ -253,6 +232,36 @@ int main(int argc, char *argv[])
   }
 
   config_pc(&d);
+
+  parse_descriptions(&d);
+
+  std::vector<monster_description>::iterator mi;
+
+  std::vector<monster*> monsters;
+
+  for (mi = d.monster_descriptions.begin(); mi != d.monster_descriptions.end(); mi++) 
+  {
+    monster *monster_ptr = new monster(mi->name, mi->description, mi->symbol, mi->color, mi->speed, mi->abilities, mi->hitpoints, mi->damage, mi->rarity);
+
+    monsters.push_back(monster_ptr);
+  }
+
+  d.monsters = monsters;
+
+
+  std::vector<object_description>::iterator oi;
+
+  std::vector<object*> objects;
+
+  for (oi = d.object_descriptions.begin(); oi != d.object_descriptions.end(); oi++) 
+  {
+    object *object_ptr = new object();
+
+    objects.push_back(object_ptr);
+  }
+
+  d.objects = objects;
+
   gen_monsters(&d);
 
   io_display(&d);

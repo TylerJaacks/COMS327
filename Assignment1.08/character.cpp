@@ -6,6 +6,8 @@
 #include "pc.h"
 #include "dungeon.h"
 
+#include <string>
+
 void character_delete(character *c)
 {
   delete c;
@@ -74,6 +76,11 @@ uint32_t character_increment_dkills(character *c)
 uint32_t character_increment_ikills(character *c, uint32_t k)
 {
   return c->kills[kill_avenged] += k;
+}
+
+uint32_t character_get_color(character *c)
+{
+  return c->color;
 }
 
 uint32_t can_see(dungeon *d, pair_t voyeur, pair_t exhibitionist,

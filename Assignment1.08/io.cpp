@@ -210,14 +210,48 @@ void io_display(dungeon_t *d)
       if ((illuminated = is_illuminated(d->PC, y, x))) {
         attron(A_BOLD);
       }
+
+  // init_pair(COLOR_RED, COLOR_RED, COLOR_BLACK);
+  // init_pair(COLOR_GREEN, COLOR_GREEN, COLOR_BLACK);
+  // init_pair(COLOR_YELLOW, COLOR_YELLOW, COLOR_BLACK);
+  // init_pair(COLOR_BLUE, COLOR_BLUE, COLOR_BLACK);
+  // init_pair(COLOR_MAGENTA, COLOR_MAGENTA, COLOR_BLACK);
+  // init_pair(COLOR_CYAN, COLOR_CYAN, COLOR_BLACK);
+  // init_pair(COLOR_WHITE, COLOR_WHITE, COLOR_BLACK);
+
       if (d->character_map[y][x] &&
-          can_see(d,
-                  character_get_pos(d->PC),
-                  character_get_pos(d->character_map[y][x]),
-                  1, 0)) {
-        mvaddch(y + 1, x,
-                character_get_symbol(d->character_map[y][x]));
-        visible_monsters++;
+          can_see(d, character_get_pos(d->PC), character_get_pos(d->character_map[y][x]), 1, 0)) {
+            if (character_get_color(d->character_map[y][x]) == 0) {
+              attron(COLOR_PAIR(COLOR_RED));
+              mvaddch(y + 1, x, character_get_symbol(d->character_map[y][x]));
+              visible_monsters++;
+              attroff(COLOR_PAIR(COLOR_RED));
+            } else if (character_get_color(d->character_map[y][x]) == 1) {
+              attron(COLOR_PAIR(COLOR_GREEN));
+              mvaddch(y + 1, x, character_get_symbol(d->character_map[y][x]));
+              visible_monsters++;
+              attroff(COLOR_PAIR(COLOR_GREEN));
+            }  else if (character_get_color(d->character_map[y][x]) == 2) {
+              attron(COLOR_PAIR(COLOR_YELLOW));
+              mvaddch(y + 1, x, character_get_symbol(d->character_map[y][x]));
+              visible_monsters++;
+              attroff(COLOR_PAIR(COLOR_YELLOW));
+            } else if (character_get_color(d->character_map[y][x]) == 3) {
+              attron(COLOR_PAIR(COLOR_CYAN));
+              mvaddch(y + 1, x, character_get_symbol(d->character_map[y][x]));
+              visible_monsters++;
+              attroff(COLOR_PAIR(COLOR_CYAN));
+            } else if (character_get_color(d->character_map[y][x]) == 4) {
+              attron(COLOR_PAIR(COLOR_MAGENTA));
+              mvaddch(y + 1, x, character_get_symbol(d->character_map[y][x]));
+              visible_monsters++;
+              attroff(COLOR_PAIR(COLOR_MAGENTA));
+            } else if (character_get_symbol(d->character_map[y][x]) == '@') {
+              attron(COLOR_PAIR(COLOR_BLACK));
+              mvaddch(y + 1, x, character_get_symbol(d->character_map[y][x]));
+              visible_monsters++;
+              attroff(COLOR_PAIR(COLOR_BLACK));
+            }
       } else {
         switch (pc_learned_terrain(d->PC, y, x)) {
         case ter_wall:
@@ -242,8 +276,6 @@ void io_display(dungeon_t *d)
           mvaddch(y + 1, x, '>');
           break;
         default:
- /* Use zero as an error symbol, since it stands out somewhat, and it's *
-  * not otherwise used.                                                 */
           mvaddch(y + 1, x, '0');
         }
       }
@@ -255,6 +287,7 @@ void io_display(dungeon_t *d)
 
   mvprintw(23, 1, "PC position is (%2d,%2d).",
            d->PC->position[dim_x], d->PC->position[dim_y]);
+
   mvprintw(22, 1, "%d known %s.", visible_monsters,
            visible_monsters > 1 ? "monsters" : "monster");
   if ((c = io_nearest_visible_monster(d))) {

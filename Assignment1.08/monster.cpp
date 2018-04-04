@@ -1,21 +1,24 @@
 #include "monster.h"
 
-monster::monster()
-{
-    // TODO Do nothing.
-}
+#include <string>
+#include <vector>
 
-monster::~monster()
-{
-    // TODO Destroy a monster.
-}
+#include <stdio.h>
+#include <unistd.h>
 
-void monster::spawn_monster()
-{
-    // TODO Spawns a monster in the dungeon at a random position.
-}
+#include "dice.h"
 
-void monster::spawn_monster(uint32_t x, uint32_t y)
+using namespace std;
+
+monster::monster(string _name, string _description, char _symbol, vector<uint32_t> _color, dice _speed, uint32_t _abilities, dice _hitpoints, dice _damage, uint32_t _rarity)
 {
-    // TODO Spawns a monster in the dungeon at a specific position.
+    name = _name;
+    description = _description;
+    symbol = _symbol;
+    color = _color;
+    speed = _speed;
+    abilities = _abilities;
+    hitpoints = _hitpoints;
+    damage = _damage;
+    rarity = _rarity;
 }

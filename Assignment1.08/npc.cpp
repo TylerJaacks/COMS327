@@ -1,4 +1,8 @@
 #include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <sys/time.h>
+#include <unistd.h>
 
 #include "utils.h"
 #include "npc.h"
@@ -8,6 +12,10 @@
 #include "path.h"
 #include "event.h"
 #include "pc.h"
+
+#include "monster.h"
+
+#include <ncurses.h>
 
 static uint32_t max_monster_cells(dungeon_t *d)
 {
@@ -36,6 +44,8 @@ void gen_monsters(dungeon *d)
   d->num_monsters = d->max_monsters < num_cells ? d->max_monsters : num_cells;
 
   for (i = 0; i < d->num_monsters; i++) {
+    int random_monster = rand_range(0, d->monsters.size() - 1);
+
     m = new npc;
     memset(m, 0, sizeof (*m));
 
@@ -48,15 +58,25 @@ void gen_monsters(dungeon *d)
                             (d->rooms[room].position[dim_x] +
                              d->rooms[room].size[dim_x] - 1));
     } while (d->character_map[p[dim_y]][p[dim_x]]);
+
+    m->name = d->monsters[random_monster]->name.c_str();
+    m->description = d->monsters[random_monster]->description.c_str();
+    m->symbol = d->monsters[random_monster]->symbol;
+    m->color = d->monsters[random_monster]->color[0];
+    m->speed = d->monsters[random_monster]->speed.roll();
+    m->characteristics = d->monsters[random_monster]->abilities & 0x0000000f;
+    m->hitpoints = d->monsters[random_monster]->hitpoints.roll();
+    m->damage = d->monsters[random_monster]->damage.roll();
+    m->rarity = d->monsters[random_monster]->rarity;
+
     m->position[dim_y] = p[dim_y];
     m->position[dim_x] = p[dim_x];
+
     d->character_map[p[dim_y]][p[dim_x]] = m;
-    m->speed = rand_range(5, 20);
+
     m->alive = 1;
     m->sequence_number = ++d->character_sequence_number;
-    m->characteristics = rand() & 0x0000000f;
-    /*    m->npc->characteristics = 0xf;*/
-    m->symbol = symbol[m->characteristics];
+    
     m->have_seen_pc = 0;
     m->kills[kill_direct] = m->kills[kill_avenged] = 0;
 
