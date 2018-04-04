@@ -73,6 +73,7 @@ class dungeon {
   uint8_t pc_distance[DUNGEON_Y][DUNGEON_X];
   uint8_t pc_tunnel[DUNGEON_Y][DUNGEON_X];
   character *character_map[DUNGEON_Y][DUNGEON_X];
+  object *object_map[DUNGEON_Y][DUNGEON_X];
   pc *PC;
   heap_t events;
   uint16_t num_monsters;
@@ -97,6 +98,7 @@ class dungeon {
 void init_dungeon(dungeon *d);
 void new_dungeon(dungeon *d);
 void delete_dungeon(dungeon *d);
+void place_items(dungeon_t *d);
 int gen_dungeon(dungeon *d);
 void render_dungeon(dungeon *d);
 int write_dungeon(dungeon *d, char *file);

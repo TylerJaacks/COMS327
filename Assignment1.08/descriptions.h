@@ -1,11 +1,11 @@
 #ifndef DESCRIPTIONS_H
-# define DESCRIPTIONS_H
+#define DESCRIPTIONS_H
 
-# include <stdint.h>
-# undef swap
-# include <vector>
-# include <string>
-# include "dice.h"
+#include <stdint.h>
+#undef swap
+#include <vector>
+#include <string>
+#include "dice.h"
 
 typedef struct dungeon dungeon_t;
 

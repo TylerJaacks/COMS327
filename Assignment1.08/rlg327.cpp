@@ -255,7 +255,21 @@ int main(int argc, char *argv[])
 
   for (oi = d.object_descriptions.begin(); oi != d.object_descriptions.end(); oi++) 
   {
-    object *object_ptr = new object();
+    object *object_ptr = new object(oi->name, 
+                              oi->description, 
+                              0,  //oi->type, // TODO FIX TYPE
+                              oi->color, 
+                              oi->hit, 
+                              oi->damage, 
+                              oi->dodge, 
+                              oi->defence, 
+                              oi->weight, 
+                              oi->speed, 
+                              oi->attribute, 
+                              oi->value, 
+                              oi->artifact, 
+                              oi->rarity);
+
 
     objects.push_back(object_ptr);
   }

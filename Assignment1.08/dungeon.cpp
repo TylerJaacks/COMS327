@@ -619,8 +619,26 @@ int gen_dungeon(dungeon_t *d)
   } while (place_rooms(d));
   connect_rooms(d);
   place_stairs(d);
+  place_items(d);
 
   return 0;
+}
+
+void place_items(dungeon_t *d)
+{
+  int num_items = 0;
+  int max_items = d->objects.size();
+
+  int rand_y = rand_range(1, DUNGEON_Y - 2);
+  int rand_x = rand_range(1, DUNGEON_X - 2);
+  int rand_items = rand_range(1, max_items - 1);
+
+  while (num_items < max_items)
+  {
+    d->object_map[rand_y][rand_x] = d->objects[rand_items];
+
+    num_items++;
+  }
 }
 
 void delete_dungeon(dungeon_t *d)
