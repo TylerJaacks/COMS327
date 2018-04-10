@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <assert.h>
 
+#include <ncurses.h>
+
 #include "dungeon.h"
 #include "heap.h"
 #include "move.h"
@@ -255,7 +257,6 @@ static void new_dungeon_level(dungeon *d, uint32_t dir)
   }
 }
 
-
 uint32_t move_pc(dungeon *d, uint32_t dir)
 {
   pair_t next;
@@ -263,7 +264,6 @@ uint32_t move_pc(dungeon *d, uint32_t dir)
 
   next[dim_y] = d->PC->position[dim_y];
   next[dim_x] = d->PC->position[dim_x];
-
 
   switch (dir) {
   case 1:
@@ -318,6 +318,18 @@ uint32_t move_pc(dungeon *d, uint32_t dir)
     move_character(d, d->PC, next);
     dijkstra(d);
     dijkstra_tunnel(d);
+
+    if(d->objmap[next[dim_y]][next[dim_x]])
+    {   
+      /* Adds a object to the carry slot if there is space. */
+      if (d->PC->carry.size() != 10)
+      {
+        d->PC->carry.push_back(d->objmap[next[dim_y]][next[dim_x]]);
+      }
+
+      /* Removes item from the floor. */
+      d->objmap[d->PC->position[dim_y]][d->PC->position[dim_x]] = NULL;
+    }
 
     return 0;
   }

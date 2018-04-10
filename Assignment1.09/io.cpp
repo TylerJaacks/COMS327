@@ -863,48 +863,81 @@ void io_handle_input(dungeon *d)
     } while (!select(STDIN_FILENO + 1, &readfs, NULL, NULL, &tv));
     fog_off = 0;
     switch (key = getch()) {
-    case '7':
+    /* Wear an item. Prompts the user for a carry slot. If an item of that type is already equipped, items are swapped. */  
+    case 'w':
+      key = getch();
+      wear_item(d, key);
+      break;
+    /* Take off an item. Prompts for equipment slot. Item goes to an open carry slot. */  
+    case 't':
+      key = getch();
+      remove_item(d, key);
+      break;
+    /* Drop an item. Prompts user for carry slot. Item goes to floor. */
+    case 'd':
+      key = getch();
+      drop_item(d, key);
+      break;
+    /* Expunge an item from the game. Prompts the user for a carry slot. Item is permanently removed from the game. */
+    case 'x':
+      key = getch();
+      expunge_item(d, key);
+      break;
+    /* List PC inventory. */
+    case 'i':
+      key = getch();
+      list_carry(d);
+      break;
+    /* List PC equipment. */
+    case 'e':
+      key = getch();
+      list_equipped(d);
+      break;
+    /* Inspect an item. Prompts user for a carry slot. Item’s description is displayed. */
+    case ',':
+      key = getch();
+      inspect_item(d, key);
+      break;
+    /* Look at a monster. Enter a targeting mode similar to the controlled teleport in 1.06.
+     * Select a visible monster with t or abort with escape (there is no random). When
+     * a monster is selected, display its description (and other information, if you like).
+     * Escape will return back to normal input processing. */
+    case 'L':
+      key = getch();
+      target_monster(d);
+      break;
     case 'y':
     case KEY_HOME:
       fail_code = move_pc(d, 7);
       break;
-    case '8':
     case 'k':
     case KEY_UP:
       fail_code = move_pc(d, 8);
       break;
-    case '9':
     case 'u':
     case KEY_PPAGE:
       fail_code = move_pc(d, 9);
       break;
-    case '6':
     case 'l':
     case KEY_RIGHT:
       fail_code = move_pc(d, 6);
       break;
-    case '3':
     case 'n':
     case KEY_NPAGE:
       fail_code = move_pc(d, 3);
       break;
-    case '2':
     case 'j':
     case KEY_DOWN:
       fail_code = move_pc(d, 2);
       break;
-    case '1':
     case 'b':
     case KEY_END:
       fail_code = move_pc(d, 1);
       break;
-    case '4':
     case 'h':
     case KEY_LEFT:
       fail_code = move_pc(d, 4);
       break;
-    case '5':
-    case ' ':
     case '.':
     case KEY_B2:
       fail_code = 0;
@@ -940,10 +973,7 @@ void io_handle_input(dungeon *d)
       io_display(d);
       fail_code = 1;
       break;
-    case 'L':
-      fail_code = 1;
-      break;
-    case 't':
+    case 'o':
       /* Teleport the PC to a random place in the dungeon.              */
       io_teleport_pc(d);
       fail_code = 1;

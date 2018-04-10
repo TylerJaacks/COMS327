@@ -45,6 +45,7 @@ void config_pc(dungeon_t *d)
   d->PC->sequence_number = 0;
   d->PC->kills[kill_direct] = d->PC->kills[kill_avenged] = 0;
   d->PC->color.push_back(COLOR_WHITE);
+  d->PC->hp = 100;
   d->PC->damage = &pc_dice;
   d->PC->name = "Isabella Garcia-Shapiro";
 
@@ -252,4 +253,356 @@ void pc_see_object(character *the_pc, object *o)
   if (o) {
     o->has_been_seen();
   }
+}
+
+bool is_same_object_type(dungeon *d, object_type_t type)
+{
+  for(std::vector<object*>::size_type i = 0; i != d->PC->carry.size(); i++) 
+  {
+    if (d->PC->carry[i]->type == type)
+    {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+/* TODO Broken */
+void wear_item(dungeon *d, int slot)
+{
+  switch (slot) 
+  {
+    /* Slot 1 */
+    case 49:
+      if (is_same_object_type(d, d->PC->carry[0]->type) == true)
+      {
+        d->PC->carry[0] = d->PC->equipped[0];
+        d->PC->carry.erase(d->PC->carry.begin());
+      }
+
+      break;
+    /* Slot 2 */
+    case 50:
+      if (is_same_object_type(d, d->PC->carry[1]->type) == true)
+      {
+        d->PC->carry[1] = d->PC->equipped[1];
+        d->PC->carry.erase(d->PC->carry.begin());
+      }
+
+      break;
+    /* Slot 3 */
+    case 51:
+      if (is_same_object_type(d, d->PC->carry[2]->type) == true)
+      {
+        d->PC->carry[2] = d->PC->equipped[2];
+        d->PC->carry.erase(d->PC->carry.begin());
+      }
+
+      break;
+    /* Slot 4 */
+    case 52:
+      if (is_same_object_type(d, d->PC->carry[3]->type) == true)
+      {
+        d->PC->carry[3] = d->PC->equipped[3];
+        d->PC->carry.erase(d->PC->carry.begin());
+      }
+
+      break;
+    /* Slot 5 */
+    case 53:
+      if (is_same_object_type(d, d->PC->carry[4]->type) == true)
+      {
+        d->PC->carry[4] = d->PC->equipped[4];
+        d->PC->carry.erase(d->PC->carry.begin());
+      }
+
+      break;
+    /* Slot 6 */
+    case 54:
+      if (is_same_object_type(d, d->PC->carry[5]->type) == true)
+      {
+        d->PC->carry[5] = d->PC->equipped[5];
+        d->PC->carry.erase(d->PC->carry.begin());
+      }
+
+      break;
+    /* Slot 7 */
+    case 55:
+      if (is_same_object_type(d, d->PC->carry[6]->type) == true)
+      {
+        d->PC->carry[6] = d->PC->equipped[6];
+        d->PC->carry.erase(d->PC->carry.begin());
+      }
+
+      break;
+    /* Slot 8 */
+    case 56:
+      if (is_same_object_type(d, d->PC->carry[7]->type) == true)
+      {
+        d->PC->carry[7] = d->PC->equipped[7];
+        d->PC->carry.erase(d->PC->carry.begin());
+      }
+
+      break;
+    /* Slot 9 */
+    case 57:
+      if (is_same_object_type(d, d->PC->carry[8]->type) == true)
+      {
+        d->PC->carry[8] = d->PC->equipped[8];
+        d->PC->carry.erase(d->PC->carry.begin());
+      }
+
+      break;
+    /* Slot 10 */
+    case 58:
+      if (is_same_object_type(d, d->PC->carry[9]->type) == true)
+      {
+        d->PC->carry[9] = d->PC->equipped[9];
+        d->PC->carry.erase(d->PC->carry.begin());
+      }
+
+      break;
+    default:
+      mvprintw(0, 0, "Invalid Carry Slot.");
+  }
+}
+
+void remove_item(dungeon *d, int slot)
+{
+  switch (slot) {
+    /* Slot 1 */
+    case 49:
+      d->PC->equipped = d->PC->carry;
+      d->PC->carry.erase(d->PC->carry.begin());
+      break;
+    /* Slot 2 */
+    case 50:
+      d->PC->equipped = d->PC->carry;
+      d->PC->carry.erase(d->PC->carry.begin() + 1);
+      break;
+    /* Slot 3 */
+    case 51:
+      d->PC->equipped = d->PC->carry;
+      d->PC->carry.erase(d->PC->carry.begin() + 2);
+      break;
+    /* Slot 4 */
+    case 52:
+      d->PC->equipped = d->PC->carry;
+      d->PC->carry.erase(d->PC->carry.begin() + 3);
+      break;
+    /* Slot 5 */
+    case 53:
+      d->PC->equipped = d->PC->carry;
+      d->PC->carry.erase(d->PC->carry.begin() + 4);
+      break;
+    /* Slot 6 */
+    case 54:
+      d->PC->equipped = d->PC->carry;
+      d->PC->carry.erase(d->PC->carry.begin() + 5);
+      break;
+    /* Slot 7 */
+    case 55:
+      d->PC->equipped = d->PC->carry;
+      d->PC->carry.erase(d->PC->carry.begin() + 6);
+      break;
+    /* Slot 8 */
+    case 56:
+      d->PC->equipped = d->PC->carry;
+      d->PC->carry.erase(d->PC->carry.begin() + 7);
+      break;
+    /* Slot 9 */
+    case 57:
+      d->PC->equipped = d->PC->carry;
+      d->PC->carry.erase(d->PC->carry.begin() + 8);
+      break;
+    /* Slot 10 */
+    case 58:
+      d->PC->equipped = d->PC->carry;
+      d->PC->carry.erase(d->PC->carry.begin() + 9);
+      break;
+    default:
+      mvprintw(0, 0, "Invalid Carry Slot.");
+  }
+}
+
+void drop_item(dungeon *d, int slot)
+{
+    switch (slot) {
+    /* Slot 1 */
+    case 49:
+      d->objmap[d->PC->position[dim_y]][d->PC->position[dim_x]] = d->PC->carry[0];
+
+      d->PC->carry.erase(d->PC->carry.begin());
+      break;
+    /* Slot 2 */
+    case 50:
+      d->objmap[d->PC->position[dim_y]][d->PC->position[dim_x]] = d->PC->carry[1];
+
+      d->PC->carry.erase(d->PC->carry.begin() + 1);
+      break;
+    /* Slot 3 */
+    case 51:
+      d->objmap[d->PC->position[dim_y]][d->PC->position[dim_x]] = d->PC->carry[2];
+
+      d->PC->carry.erase(d->PC->carry.begin() + 2);
+      break;
+    /* Slot 4 */
+    case 52:
+      d->objmap[d->PC->position[dim_y]][d->PC->position[dim_x]] = d->PC->carry[3];
+
+      d->PC->carry.erase(d->PC->carry.begin() + 3);
+      break;
+    /* Slot 5 */
+    case 53:
+      d->objmap[d->PC->position[dim_y]][d->PC->position[dim_x]] = d->PC->carry[4];
+
+      d->PC->carry.erase(d->PC->carry.begin() + 4);
+      break;
+    /* Slot 6 */
+    case 54:
+      d->objmap[d->PC->position[dim_y]][d->PC->position[dim_x]] = d->PC->carry[5];
+
+      d->PC->carry.erase(d->PC->carry.begin() + 5);
+      break;
+    /* Slot 7 */
+    case 55:
+      d->objmap[d->PC->position[dim_y]][d->PC->position[dim_x]] = d->PC->carry[6];
+
+      d->PC->carry.erase(d->PC->carry.begin() + 6);
+      break;
+    /* Slot 8 */
+    case 56:
+      d->objmap[d->PC->position[dim_y]][d->PC->position[dim_x]] = d->PC->carry[7];
+
+      d->PC->carry.erase(d->PC->carry.begin() + 7);
+      break;
+    /* Slot 9 */
+    case 57:
+      d->objmap[d->PC->position[dim_y]][d->PC->position[dim_x]] = d->PC->carry[8];
+
+      d->PC->carry.erase(d->PC->carry.begin() + 8);
+      break;
+    /* Slot 10 */
+    case 58:
+      d->objmap[d->PC->position[dim_y]][d->PC->position[dim_x]] = d->PC->carry[9];
+
+      d->PC->carry.erase(d->PC->carry.begin() + 9);
+      break;
+    default:
+      mvprintw(0, 0, "Invalid Carry Slot.");
+  }
+}
+
+void expunge_item(dungeon *d, int slot)
+{
+  switch (slot) {
+    /* Slot 1 */
+    case 49:
+      d->PC->carry[0] = NULL;
+      break;
+    /* Slot 2 */
+    case 50:
+      d->PC->carry[1] = NULL;
+      break;
+    /* Slot 3 */
+    case 51:
+      d->PC->carry[2] = NULL;
+      break;
+    /* Slot 4 */
+    case 52:
+      d->PC->carry[3] = NULL;
+      break;
+    /* Slot 5 */
+    case 53:
+      d->PC->carry[4] = NULL;
+      break;
+    /* Slot 6 */
+    case 54:
+      d->PC->carry[5] = NULL;
+      break;
+    /* Slot 7 */
+    case 55:
+      d->PC->carry[6] = NULL;
+      break;
+    /* Slot 8 */
+    case 56:
+      d->PC->carry[7] = NULL;
+      break;
+    /* Slot 9 */
+    case 57:
+      d->PC->carry[8] = NULL;
+      break;
+    /* Slot 10 */
+    case 58:
+      d->PC->carry[9] = NULL;
+      break;
+    default:
+      mvprintw(0, 0, "Invalid Carry Slot.");
+  }
+}
+
+void list_carry(dungeon *d)
+{
+  // TODO List Carry
+}
+
+void list_equipped(dungeon *d)
+{
+  // TODO List Equip
+}
+
+void inspect_item(dungeon *d, int slot)
+{
+    switch (slot) {
+    /* Slot 1 */
+    case 49:
+      mvprintw(26, 1, "%s", d->PC->carry[0]->description.c_str());
+      break;
+    /* Slot 2 */
+    case 50:
+      mvprintw(26, 1, "%s", d->PC->carry[1]->description.c_str());
+      break;
+    /* Slot 3 */
+    case 51:
+      mvprintw(26, 1, "%s", d->PC->carry[2]->description.c_str());
+      break;
+    /* Slot 4 */
+    case 52:
+      mvprintw(26, 1, "%s", d->PC->carry[3]->description.c_str());
+      break;
+    /* Slot 5 */
+    case 53:
+      mvprintw(26, 1, "%s", d->PC->carry[4]->description.c_str());
+      break;
+    /* Slot 6 */
+    case 54:
+      mvprintw(26, 1, "%s", d->PC->carry[5]->description.c_str());
+      break;
+    /* Slot 7 */
+    case 55:
+      mvprintw(26, 1, "%s", d->PC->carry[6]->description.c_str());
+      break;
+    /* Slot 8 */
+    case 56:
+      mvprintw(26, 1, "%s", d->PC->carry[7]->description.c_str());
+      break;
+    /* Slot 9 */
+    case 57:
+      mvprintw(26, 1, "%s", d->PC->carry[8]->description.c_str());
+      break;
+    /* Slot 10 */
+    case 58:
+      mvprintw(26, 1, "%s", d->PC->carry[9]->description.c_str());
+      break;
+    default:
+      mvprintw(0, 0, "Invalid Carry Slot.");
+  }
+
+  refresh();
+} 
+
+void target_monster(dungeon *d)
+{
+  // TODO Target Monster
 }

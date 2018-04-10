@@ -7,10 +7,10 @@
 # include "dims.h"
 
 class object {
- private:
+ public:
+  object_type_t type; 
   const std::string &name;
   const std::string &description;
-  object_type_t type;
   uint32_t color;
   pair_t position;
   const dice &damage;

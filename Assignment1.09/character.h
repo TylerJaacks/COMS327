@@ -15,6 +15,7 @@ typedef enum kill_type {
 } kill_type_t;
 
 class dice;
+class object;
 
 class character {
  public:
