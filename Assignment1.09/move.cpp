@@ -62,6 +62,9 @@ void do_combat(dungeon *d, character *atk, character *def)
     if (def != d->PC) {
       d->num_monsters--;
     } else {
+      io_queue_message("Targeting %s with an HP of %d", def->name, def->hp);
+      getch();
+
       if ((part = rand() % (sizeof (organs) / sizeof (organs[0]))) < 26) {
         io_queue_message("As %s%s eats your %s,", is_unique(atk) ? "" : "the ",
                          atk->name, organs[rand() % (sizeof (organs) /

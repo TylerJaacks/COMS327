@@ -92,6 +92,7 @@ class monster_description {
     num_alive--;
   }
   friend npc;
+  friend bool boss_is_alive(dungeon *d);
 };
 
 class object_description {

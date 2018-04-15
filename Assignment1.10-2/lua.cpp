@@ -6,6 +6,8 @@ lua::lua()
     state = luaL_newstate();
 
     luaL_openlibs(state);
+
+    register_functions(state);
 }
 
 /* Logs the error for the top of the Lua stack. */
@@ -39,4 +41,9 @@ bool lua::execute_script(const char* filename)
     }
 
     return true;
+}
+
+void lua::register_functions(lua_State* state)
+{
+    lua_register(state, "CanSee", lua_can_see); // TODO Undefined LOL Forehead!
 }

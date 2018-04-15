@@ -3,16 +3,15 @@ CXX = g++
 ECHO = echo
 RM = rm -f
 
-CFLAGS = -Wall -Werror -ggdb -funroll-loops
+CFLAGS = -ggdb -funroll-loops
 CXXFLAGS = -ggdb -funroll-loops
 LDFLAGS = -lncurses -llua5.3
 
 BIN = rlg327
 OBJS = rlg327.o heap.o dungeon.o path.o utils.o character.o event.o \
-       pc.o npc.o move.o io.o descriptions.o dice.o object.o lua.o
+       pc.o npc.o move.o io.o descriptions.o dice.o object.o lua.o api.o
 
 all: $(BIN)
-
 $(BIN): $(OBJS)
 	@$(ECHO) Linking $@
 	@$(CXX) $^ -o $@ $(LDFLAGS)

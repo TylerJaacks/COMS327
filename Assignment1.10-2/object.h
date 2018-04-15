@@ -42,6 +42,16 @@ class object {
   bool have_seen() { return seen; }
   void has_been_seen() { seen = true; }
   int16_t *get_position() { return position; }
+  void pick_up() { od.find(); }
+  uint32_t is_equipable();
+  uint32_t is_removable();
+  uint32_t is_dropable();
+  uint32_t is_destructable();
+  int32_t get_eq_slot_index();
+  void to_pile(dungeon_t *d, pair_t location);
+  inline object *get_next() { return next; }
+  inline void set_next(object *n) { next = n; }
+  const char *get_description() { return description.c_str(); }
 };
 
 void gen_objects(dungeon_t *d);

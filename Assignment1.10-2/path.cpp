@@ -33,9 +33,6 @@ static int32_t tunnel_cmp(const void *key, const void *with) {
 
 void dijkstra(dungeon *d)
 {
-  /* Currently assumes that monsters only move on floors.  Will *
-   * need to be modified for tunneling and pass-wall monsters.  */
-
   heap_t h;
   uint32_t x, y;
   static path_t p[DUNGEON_Y][DUNGEON_X], *c;
@@ -146,9 +143,6 @@ void dijkstra(dungeon *d)
 
 void dijkstra_tunnel(dungeon *d)
 {
-  /* Currently assumes that monsters only move on floors.  Will *
-   * need to be modified for tunneling and pass-wall monsters.  */
-
   heap_t h;
   uint32_t x, y;
   uint32_t size;

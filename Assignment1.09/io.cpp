@@ -902,8 +902,7 @@ void io_handle_input(dungeon *d)
      * Select a visible monster with t or abort with escape (there is no random). When
      * a monster is selected, display its description (and other information, if you like).
      * Escape will return back to normal input processing. */
-    case 'L':
-      key = getch();
+    case 'u':
       target_monster(d);
       break;
     case 'y':
@@ -914,7 +913,6 @@ void io_handle_input(dungeon *d)
     case KEY_UP:
       fail_code = move_pc(d, 8);
       break;
-    case 'u':
     case KEY_PPAGE:
       fail_code = move_pc(d, 9);
       break;

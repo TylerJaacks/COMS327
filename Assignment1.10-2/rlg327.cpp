@@ -84,6 +84,8 @@ int main(int argc, char *argv[])
 
   lua_manager->execute_script("/home/tylerjaacks/.rlg327/test_mod.lua");
 
+  return 0;
+
   dungeon_t d;
   time_t seed;
   struct timeval tv;
@@ -252,7 +254,7 @@ int main(int argc, char *argv[])
 
   io_display(&d);
   io_queue_message("Seed is %u.", seed);
-  while (pc_is_alive(&d) && dungeon_has_npcs(&d) && !d.quit) {
+  while (pc_is_alive(&d) && boss_is_alive(&d) && !d.quit) {
     do_moves(&d);
   }
   io_display(&d);

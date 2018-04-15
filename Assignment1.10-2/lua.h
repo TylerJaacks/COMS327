@@ -4,6 +4,8 @@
 #include <lua5.3/lua.hpp>
 #include <string>
 
+#include "api.h"
+
 #endif
 
 class lua 
@@ -16,6 +18,7 @@ public:
 
 public:
     bool execute_script(const char* filename);
+    void register_functions(lua_State* state);
 
 private:
     void log_error();
