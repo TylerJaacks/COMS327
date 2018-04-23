@@ -1,18 +1,59 @@
 #include "api.h"
 
-static int lua_can_see(lua_State* state)
+dungeon_t *d;
+
+/* Returns the current dungeon. */
+void set_dungeon(dungeon_t *d_ptr)
 {
-    printf("can_see has been called from Lua.\n");
-
-    int args_count = lua_gettop(state);
-
-    dungeon *d = NULL; // = lua_to*(L, 1);
-    pair_t voyeur = {4}; // = lua_to*(L, 2);
-    pair_t exhibitionist = {4}; // = lua_to*(L, 3);
-    int is_pc = 0; // = lua_to*(L, 4);
-    int learn = 0; // = lua_to*(L, 5);
-
-    uint32_t result = can_see(d, voyeur, exhibitionist, is_pc, learn);
-
-    lua_pushnumber(state, result);
+    d = d_ptr;
 }
+
+/* Gets the current dungeon. */
+int lua_get_dungeon(lua_State *l)
+{
+    printf("GetDungeon method called.\n");
+    int argc = lua_gettop(l);
+
+    if (argc == 0) {
+        /* TODO Gets the current dungeon. */
+    } else {
+        printf("Argument Errors.\n");
+    }
+
+    return 1;
+}
+
+/* Deletes a character */
+int lua_character_delete(lua_State *l)
+{
+    printf("DeleteCharacter method called.\n");
+    int argc = lua_gettop(l);
+
+    character *character;
+
+    /* TODO Get the character from the parameters. */
+
+    if (argc == 1) {
+        printf("Deleting Character.\n");
+        character_delete(character);   
+    } else {
+        printf("Argument Errors.\n");
+    }
+
+    return 0;
+}
+
+int lua_character_get_pos(lua_State *l)
+{
+    printf("GetCharacterPos method called.\n");
+    int argc = lua_gettop(l);
+
+    if (argc == 0) {
+        /* TODO Gets the characters position. */
+    } else {
+        printf("Argument Errors.\n");
+    }
+
+    return 1;
+}
+

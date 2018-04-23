@@ -12,7 +12,7 @@
 #include "io.h"
 #include "object.h"
 
-#include "lua.h"
+#include "lua_manager.h"
 
 const char *victory =
   "\n                                       o\n"
@@ -80,12 +80,6 @@ void usage(char *name)
 
 int main(int argc, char *argv[])
 {
-  lua *lua_manager = new lua();
-
-  lua_manager->execute_script("/home/tylerjaacks/.rlg327/test_mod.lua");
-
-  return 0;
-
   dungeon_t d;
   time_t seed;
   struct timeval tv;
@@ -107,6 +101,14 @@ int main(int argc, char *argv[])
   save_file = load_file = NULL;
   d.max_monsters = MAX_MONSTERS;
   d.max_objects = MAX_OBJECTS;
+
+  /* Does the Lua Stuff. */
+  init_lua();
+  set_dungeon(&d);
+  register_lua_functions();
+  load_script("/home/tylerjaacks/.rlg327/test_mod.lua");
+
+  return 0;
 
   /* The project spec requires '--load' and '--save'.  It's common  *
    * to have short and long forms of most switches (assuming you    *
